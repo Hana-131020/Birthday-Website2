@@ -1,0 +1,2691 @@
+/* ==========================================================================
+   THE BOOK OF US — REALISTIC VINTAGE HARDCOVER STORYBOOK DESIGN SYSTEM
+   Authentic 1960s-1980s Antiquarian Leather & Cotton-Rag Parchment Tome
+   ========================================================================== */
+
+:root {
+  /* Atmosphere & Environment (Warm Antique Library & Candlelight) */
+  --bg-library: #0c0705;
+  --bg-library-warm: #160c07;
+
+  /* Antique Moroccan Leather Hardcover Binding (Deep Burgundy / Oxblood) */
+  --leather-deep: #140407;
+  --leather-burgundy: #22080d;
+  --leather-rich: #320c13;
+  --leather-highlight: #46121b;
+  --leather-border: #5d1724;
+
+  /* Burnished Antique 24k Gold Leaf & Aged Brass Accents */
+  --gold-primary: #dfb943;
+  --gold-secondary: #c29933;
+  --gold-muted: #947225;
+  --gold-dark: #634b14;
+  --gold-glow: rgba(223, 185, 67, 0.45);
+  --gold-shine: linear-gradient(135deg, #f7e2a3 0%, #dfb943 45%, #b88a26 100%);
+  --gold-foil: linear-gradient(135deg, #fae6a6 0%, #dfb943 30%, #a87e22 70%, #f6e3a4 100%);
+
+  /* Warm Aged Parchment & Museum Cotton-Rag Paper (Multi-layered Patina) */
+  --parchment-base: #f8f1df;
+  --parchment-light: #fffdf8;
+  --parchment-texture: #f3e5c9;
+  --parchment-shadow: #dfcba9;
+  --parchment-border: #cfbb97;
+  --parchment-aged-edge: rgba(85, 48, 18, 0.35);
+  --parchment-spine-gutter: rgba(18, 8, 3, 0.42);
+
+  /* Historical Printing Ink Palette (Walnut Sepia, Roasted Umber & Deep Royal Wine) */
+  --ink-primary: #1a0f07;       /* Antique deep walnut ink with letterpress depth */
+  --ink-secondary: #3b2515;     /* Medium roasted sepia ink for subheadings */
+  --ink-muted: #664d36;         /* Faded vintage ink for notes & metadata */
+  --wine-accent: #7a121d;       /* Royal deep wine-red for chapter numerals & drop ornaments */
+  --wine-dark: #4d0a13;         /* Dark antique crimson */
+
+  /* Classic Storybook Typography & Vintage Calligraphy Handwriting */
+  --font-display: 'Cinzel', serif;
+  --font-decorative: 'Cinzel Decorative', serif;
+  --font-serif: 'EB Garamond', 'Cormorant Garamond', Georgia, serif;
+  --font-title: 'Cormorant Garamond', serif;
+  --font-script: 'Alex Brush', cursive;
+  --font-calligraphy: 'Marck Script', 'Caveat', 'Alex Brush', cursive;
+  --font-hand: 'Gochi Hand', 'Caveat', cursive;
+  --font-chunky: 'Bricolage Grotesque', 'Cinzel', system-ui, sans-serif;
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+
+  /* Geometry & Real Book Multi-Layer Page Depth Shadows */
+  --radius-sm: 6px;
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  
+  /* Physical Fore-Edge Multi-Sheet Paper Stack (Realistic 500-page Tome) */
+  --shadow-book: 
+    0 35px 85px rgba(0, 0, 0, 0.96),
+    0 15px 35px rgba(0, 0, 0, 0.75),
+    1px 1px 0 #ded1ba,
+    2px 2px 0 #d4c5ab,
+    3px 3px 0 #c9b99d,
+    4px 4px 0 #ded1ba,
+    5px 5px 0 #bead8f,
+    6px 6px 0 #d9cca8,
+    7px 7px 0 #b3a07c,
+    8px 8px 0 #ded1ba,
+    9px 9px 0 #a99672,
+    10px 10px 0 #bead8f,
+    12px 12px 0 #9e8a66,
+    16px 16px 30px rgba(0, 0, 0, 0.7);
+}
+
+/* RESET & BASE */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  background-color: #18060b;
+  background-image: 
+    radial-gradient(circle at 50% 30%, #3e121d 0%, #20060c 50%, #100206 100%);
+  color: var(--ink-primary);
+  font-family: var(--font-serif);
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+}
+
+/* STARRY CANVAS (Warm Golden Library Dust & Candle Motes) */
+#star-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 1;
+  pointer-events: none;
+  opacity: 0.85;
+}
+
+/* WARM AMBIENT CANDLELIGHT ORBS */
+.ambient-orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(85px);
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.45;
+  will-change: transform;
+  transform: translateZ(0);
+}
+
+.orb-1 {
+  width: 580px;
+  height: 580px;
+  top: -140px;
+  right: -140px;
+  background: radial-gradient(circle, rgba(255, 93, 143, 0.22) 0%, rgba(223, 155, 60, 0.35) 50%, transparent 70%);
+}
+
+.orb-2 {
+  width: 620px;
+  height: 620px;
+  bottom: -160px;
+  left: -160px;
+  background: radial-gradient(circle, rgba(165, 30, 48, 0.45) 0%, rgba(223, 185, 67, 0.2) 50%, transparent 70%);
+}
+
+/* STORYBOOK VIEWPORT CONTAINER (ANTIQUE READING ATMOSPHERE) */
+.storybook-viewport {
+  position: relative;
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px 80px 20px;
+  z-index: 10;
+}
+
+/* VINTAGE ROOM VIGNETTE & WARM CANDLE DIFFUSION AROUND BOOK */
+.storybook-viewport::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 3;
+  background: 
+    radial-gradient(ellipse at 50% 50%, transparent 50%, rgba(10, 5, 4, 0.5) 80%, rgba(5, 2, 2, 0.88) 100%),
+    radial-gradient(circle at 50% 30%, rgba(223, 185, 67, 0.04) 0%, transparent 60%);
+}
+
+/* ==========================================================================
+   3D HARDCOVER STORYBOOK CONTAINER (MOROCCAN LEATHER WITH GILT TOOLING)
+   ========================================================================== */
+.storybook {
+  position: relative;
+  width: 100%;
+  max-width: 1040px;
+  min-height: 750px;
+  background: linear-gradient(135deg, #180507 0%, #2b0b10 40%, #1c060a 75%, #100204 100%);
+  border-radius: 18px;
+  box-shadow: var(--shadow-book);
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  /* Bound Book Spine with Raised Leather Ribs and Stitching Grooves */
+  border: 3px solid #3c1017;
+  border-left: 22px solid #0f0204;
+  outline: 1.5px solid rgba(223, 185, 67, 0.35);
+  outline-offset: -3px;
+}
+
+/* Spine Embossed Ribs Simulation on Outer Left */
+.storybook::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -22px;
+  width: 22px;
+  height: 100%;
+  border-radius: 14px 0 0 14px;
+  background: repeating-linear-gradient(
+    to bottom,
+    #0f0204 0px,
+    #0f0204 40px,
+    #2c0a10 42px,
+    #dfb943 43px,
+    #2c0a10 44px,
+    #0f0204 46px,
+    #0f0204 140px
+  );
+  box-shadow: inset -2px 0 6px rgba(0, 0, 0, 0.8), inset 2px 0 4px rgba(255, 255, 255, 0.1);
+  z-index: 120;
+  pointer-events: none;
+}
+
+/* HARDCOVER FRONT COVER (ANTIQUE MOROCCAN LEATHER WITH GOLD STAMPING) 🔐 */
+.book-cover-front {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 50% 30%, rgba(223, 185, 67, 0.12) 0%, transparent 65%),
+    linear-gradient(135deg, #3d1017 0%, #200508 50%, #300a12 100%);
+  border-radius: 16px;
+  padding: 24px;
+  z-index: 100;
+  transform-origin: left center;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s ease 0.4s;
+  box-shadow: 
+    inset 0 0 60px rgba(0, 0, 0, 0.9),
+    0 16px 45px rgba(0, 0, 0, 0.75);
+  border: 3px solid #1a0408;
+}
+
+/* Translucent vintage washi tape pinned on top of the cover (Inspired by Reference) */
+.book-cover-front::before {
+  content: "";
+  position: absolute;
+  top: -12px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 110px;
+  height: 24px;
+  background: rgba(255, 248, 230, 0.85);
+  backdrop-filter: blur(2px);
+  border: 1.5px dashed rgba(45, 20, 24, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 110;
+  pointer-events: none;
+}
+
+/* GOLD-STITCHED COVER BORDER */
+.cover-border {
+  width: 100%;
+  height: 100%;
+  border: 2px dashed rgba(223, 185, 67, 0.55);
+  border-radius: 12px;
+  padding: 24px 20px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* CORNER FILIGREE DECORATIONS */
+.corner-filigree {
+  position: absolute;
+  color: var(--gold-primary);
+  font-size: 1.4rem;
+  line-height: 1;
+  text-shadow: 0 0 10px var(--gold-glow), 0 1px 2px rgba(0,0,0,0.8);
+}
+.top-left { top: 12px; left: 14px; }
+.top-right { top: 12px; right: 14px; }
+.bottom-left { bottom: 12px; left: 14px; }
+.bottom-right { bottom: 12px; right: 14px; }
+
+/* EMBOSSED BRASS KEYHOLE ICON */
+.lock-icon-wrap {
+  width: 66px;
+  height: 66px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fae6a6 0%, var(--gold-primary) 50%, var(--gold-muted) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 12px;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.7),
+    inset 0 2px 5px rgba(255, 255, 255, 0.75),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.6);
+  border: 2.5px solid #1a0408;
+}
+
+.lock-icon { 
+  font-size: 1.75rem; 
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.6));
+}
+
+.book-badge {
+  display: inline-block;
+  font-family: var(--font-chunky);
+  font-size: 0.75rem;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: #faecc5;
+  background: rgba(223, 185, 67, 0.15);
+  border: 1.5px solid rgba(223, 185, 67, 0.35);
+  border-radius: 30px;
+  padding: 4px 16px;
+  margin-bottom: 8px;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.book-title {
+  font-family: var(--font-decorative);
+  font-size: clamp(2.3rem, 5.8vw, 3.4rem);
+  color: #fffaf0;
+  text-shadow: 
+    0 2px 8px rgba(0,0,0,0.95),
+    0 0 25px var(--gold-glow);
+  margin-bottom: 4px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+.book-subtitle {
+  font-family: var(--font-hand);
+  font-size: 1.45rem;
+  color: #ffe8b5;
+  margin-bottom: 18px;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.85);
+}
+
+/* ANTIQUE SCRAPBOOK INSERT CARD FOR LOGIN */
+.login-card-book {
+  width: 100%;
+  max-width: 370px;
+  background: #fffdf8;
+  border: 2.5px solid #2d1418;
+  border-left: 6px solid #7a121d;
+  border-radius: 12px;
+  padding: 24px 22px 20px 22px;
+  text-align: left;
+  box-shadow: 
+    6px 8px 0 #1a0408,
+    0 16px 36px rgba(0, 0, 0, 0.7);
+  position: relative;
+}
+
+/* Washi tape pinning the login card */
+.login-card-book::before,
+.login-card-book::after {
+  content: "";
+  position: absolute;
+  top: -8px;
+  width: 48px;
+  height: 16px;
+  background: rgba(255, 245, 230, 0.85);
+  border: 1px dashed rgba(45, 20, 24, 0.4);
+  box-shadow: 0 1px 4px rgba(0,0,0,0.15);
+  z-index: 5;
+}
+.login-card-book::before { left: 16px; transform: rotate(-5deg); }
+.login-card-book::after { right: 16px; transform: rotate(4deg); }
+
+.input-group { margin-bottom: 12px; }
+.input-group label {
+  display: block;
+  font-family: var(--font-chunky);
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #2d1418;
+  margin-bottom: 5px;
+  font-weight: 800;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 2px solid #2d1418;
+  color: #1a0f07;
+  font-family: var(--font-chunky);
+  font-weight: 600;
+  font-size: 0.95rem;
+  outline: none;
+  box-shadow: 2px 2px 0 rgba(45, 20, 24, 0.12);
+  transition: all 0.2s ease;
+}
+
+.input-group input:focus {
+  border-color: #8e1b2b;
+  box-shadow: 3px 3px 0 #8e1b2b;
+}
+
+.full-width { width: 100%; margin-top: 10px; }
+
+.login-feedback {
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  margin-top: 10px;
+  text-align: center;
+  min-height: 20px;
+  color: var(--wine-accent);
+  font-weight: 700;
+}
+
+/* UNLOCKED OPEN BOOK STATE */
+.storybook.open-book .book-cover-front {
+  transform: rotateY(-180deg);
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   INSIDE PARCHMENT PAGES WRAPPER & PHYSICAL PAGE-STACK DEPTH
+   ========================================================================== */
+.book-pages-wrapper {
+  position: relative;
+  width: 100%;
+  min-height: 750px;
+  background: var(--parchment-base);
+  background-image: 
+    radial-gradient(ellipse at 55% 35%, rgba(255, 252, 242, 0.7) 0%, rgba(246, 237, 218, 0.35) 45%, transparent 75%),
+    linear-gradient(to right, rgba(18, 8, 3, 0.42) 0%, rgba(35, 16, 6, 0.22) 2.5%, rgba(55, 25, 10, 0.08) 7%, transparent 12%, transparent 88%, rgba(55, 25, 10, 0.06) 93%, rgba(35, 16, 6, 0.15) 97.5%, rgba(18, 8, 3, 0.3) 100%),
+    linear-gradient(135deg, #fdf8ee 0%, #f6ecd5 35%, #eee1c3 70%, #e6d3af 100%);
+  border-radius: 14px;
+  border: 1px solid var(--parchment-border);
+  box-shadow: 
+    inset 0 0 55px var(--parchment-aged-edge),
+    inset 4px 0 16px rgba(0,0,0,0.25),
+    0 12px 35px rgba(0,0,0,0.55);
+  overflow: hidden;
+  perspective: 2400px;
+  transform-style: preserve-3d;
+  contain: layout style;
+  isolation: isolate;
+}
+
+/* Fore-Edge Page Stacking Lines on the Right Inner Margin */
+.book-pages-wrapper::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 8px;
+  height: 100%;
+  background: repeating-linear-gradient(
+    to bottom,
+    rgba(140, 105, 60, 0.15) 0px,
+    rgba(140, 105, 60, 0.15) 1px,
+    transparent 1px,
+    transparent 3px
+  );
+  box-shadow: inset 1px 0 2px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 105;
+}
+
+/* DEEP BURGUNDY VELVET RIBBON BOOKMARK */
+.ribbon-bookmark {
+  position: absolute;
+  top: -6px;
+  right: 56px;
+  width: 26px;
+  height: 115px;
+  background: linear-gradient(135deg, var(--wine-accent), var(--wine-dark));
+  box-shadow: 
+    0 6px 14px rgba(0, 0, 0, 0.45),
+    inset 0 0 6px rgba(223, 185, 67, 0.4);
+  z-index: 110;
+  border-radius: 0 0 3px 3px;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 82%, 0 100%);
+  pointer-events: none;
+  border-bottom: 2.5px solid var(--gold-secondary);
+}
+
+/* ==========================================================================
+   INDIVIDUAL PARCHMENT PAGES (AUTHENTIC HANDMADE COTTON-RAG VELLUM)
+   ========================================================================== */
+.parchment-page {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  padding: 34px 44px 38px 44px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  opacity: 0;
+  visibility: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  
+  /* High-Resolution Cotton-Rag Laid Paper Grain & Tactile Dot-Grid (Inspired by Reference) */
+  background-color: #fbf5e6;
+  background-image: 
+    /* Dotted laid paper grid inspired by reference website */
+    radial-gradient(rgba(120, 75, 35, 0.14) 1.2px, transparent 1.2px),
+    /* Binding gutter deep shadow on left & page curvature on right */
+    linear-gradient(to right, rgba(18, 8, 3, 0.38) 0%, rgba(35, 16, 6, 0.2) 2.5%, rgba(55, 25, 10, 0.06) 7%, transparent 12%, transparent 88%, rgba(55, 25, 10, 0.05) 93%, rgba(35, 16, 6, 0.12) 97.5%, rgba(18, 8, 3, 0.25) 100%),
+    /* Organic paper fiber texture & aged coffee/tea patina */
+    radial-gradient(ellipse at 50% 30%, rgba(255, 253, 248, 0.85) 0%, rgba(250, 243, 226, 0.6) 50%, rgba(240, 224, 195, 0.35) 80%, transparent 100%),
+    linear-gradient(135deg, #fdf8ee 0%, #f6edd5 40%, #eddcc0 80%, #e5d0a8 100%);
+  background-size: 22px 22px, 100% 100%, 100% 100%, 100% 100%;
+  border-radius: 14px;
+  
+  /* Physical Paper Thickness Simulation on Cardstock Page Edges */
+  border: 1.5px solid #d4c09d;
+  border-right: 4px solid #bba47f;
+  border-bottom: 3.5px solid #b09974;
+  
+  box-shadow: 
+    inset 0 0 65px rgba(110, 60, 20, 0.22),
+    inset 0 0 16px rgba(175, 110, 45, 0.16),
+    inset 18px 0 24px -8px rgba(20, 8, 3, 0.3),
+    0 12px 32px rgba(0, 0, 0, 0.28);
+
+  transform-origin: left center;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translate3d(0, 0, 0);
+  contain: layout style;
+}
+
+.parchment-page::-webkit-scrollbar {
+  display: none;
+}
+
+/* AUTHENTIC VINTAGE PARCHMENT BACKSIDE OF TURNING PAGE */
+.parchment-page::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--parchment-base);
+  background-image: 
+    linear-gradient(to left, rgba(45, 22, 10, 0.22) 0%, transparent 12%, transparent 88%, rgba(45, 22, 10, 0.18) 100%),
+    linear-gradient(225deg, #faf3e2 0%, #eee0c4 50%, #e6d3b3 100%);
+  border-radius: 14px;
+  border: 1px solid var(--parchment-border);
+  box-shadow: inset 0 0 40px var(--parchment-aged-edge);
+  transform: rotateY(180deg);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  pointer-events: none;
+  z-index: 50;
+}
+
+/* ACTIVE FLAT PAGE (RESTING STATE) */
+.parchment-page.active-page {
+  opacity: 1;
+  visibility: visible;
+  transform: rotateY(0deg) translateZ(0);
+  z-index: 30;
+}
+
+.parchment-page.hidden-page {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+/* ==========================================================================
+   PHYSICAL PAGE-TURN ANIMATIONS & NATURAL LIGHTING SHADOWS
+   ========================================================================== */
+
+/* FORWARD PAGE FLIP (NEXT BUTTON) */
+.parchment-page.page-flip-forward {
+  opacity: 1;
+  visibility: visible;
+  z-index: 60;
+  transform-origin: left center;
+  will-change: transform;
+  animation: flipPageForward 1.0s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+}
+
+.parchment-page.page-flip-forward::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: 
+    radial-gradient(circle at 92% 8%, rgba(255, 245, 215, 0.45) 0%, rgba(180, 130, 70, 0.18) 24%, transparent 50%),
+    linear-gradient(to right, rgba(40, 20, 10, 0.38) 0%, rgba(255, 245, 215, 0.25) 30%, rgba(50, 25, 10, 0.28) 70%, rgba(20, 10, 5, 0.45) 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 45;
+  will-change: opacity;
+  animation: flipLightingForward 1.0s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+}
+
+@keyframes flipLightingForward {
+  0% { opacity: 0; }
+  18% { opacity: 0.75; }
+  45% { opacity: 0.95; }
+  75% { opacity: 0.45; }
+  100% { opacity: 0; }
+}
+
+@keyframes flipPageForward {
+  0% {
+    transform: rotateY(0deg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+  35% {
+    transform: rotateY(-65deg) skewY(-1.2deg);
+    box-shadow: -15px 25px 45px rgba(0, 0, 0, 0.4);
+  }
+  70% {
+    transform: rotateY(-130deg) skewY(0.8deg);
+    box-shadow: -25px 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: rotateY(-180deg);
+    box-shadow: none;
+  }
+}
+
+/* BACKWARD PAGE FLIP (PREVIOUS BUTTON) */
+.parchment-page.page-flip-backward {
+  opacity: 1;
+  visibility: visible;
+  z-index: 60;
+  transform-origin: left center;
+  will-change: transform;
+  animation: flipPageBackward 1.0s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+}
+
+.parchment-page.page-flip-backward::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 14px;
+  background: 
+    linear-gradient(to left, rgba(40, 20, 10, 0.38) 0%, rgba(255, 245, 215, 0.25) 30%, rgba(50, 25, 10, 0.28) 70%, rgba(20, 10, 5, 0.45) 100%);
+  opacity: 0;
+  pointer-events: none;
+  z-index: 45;
+  will-change: opacity;
+  animation: flipLightingBackward 1.0s cubic-bezier(0.28, 0.84, 0.42, 1) forwards;
+}
+
+@keyframes flipLightingBackward {
+  0% { opacity: 0.9; }
+  50% { opacity: 0.7; }
+  100% { opacity: 0; }
+}
+
+@keyframes flipPageBackward {
+  0% {
+    transform: rotateY(-180deg);
+    box-shadow: none;
+  }
+  35% {
+    transform: rotateY(-120deg) skewY(1.2deg);
+    box-shadow: -25px 20px 40px rgba(0, 0, 0, 0.3);
+  }
+  70% {
+    transform: rotateY(-50deg) skewY(-0.8deg);
+    box-shadow: -15px 25px 45px rgba(0, 0, 0, 0.4);
+  }
+  100% {
+    transform: rotateY(0deg);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.parchment-page.page-incoming-forward {
+  opacity: 1;
+  visibility: visible;
+  z-index: 25;
+  transform: rotateY(0deg) translateZ(0);
+}
+
+.parchment-page.page-underneath-backward {
+  opacity: 1;
+  visibility: visible;
+  z-index: 25;
+  transform: rotateY(0deg) translateZ(0);
+}
+
+/* ==========================================================================
+   PRINTED STORYBOOK TYPOGRAPHY & LETTERPRESS ORNAMENTS
+   ========================================================================== */
+.page-inner {
+  width: 100%;
+  max-width: 920px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.text-center { text-align: center; }
+
+/* CLASSIC PRINTED CHAPTER HEADERS */
+.chapter-header {
+  margin-bottom: 22px;
+  text-align: center;
+  position: relative;
+}
+
+.chapter-num {
+  font-family: var(--font-chunky);
+  font-size: 0.76rem;
+  letter-spacing: 3.5px;
+  color: var(--wine-accent);
+  font-weight: 800;
+  display: inline-block;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+  padding: 4px 18px;
+  background: rgba(142, 27, 43, 0.08);
+  border: 1.5px solid rgba(142, 27, 43, 0.25);
+  border-radius: 30px;
+  box-shadow: 0 2px 6px rgba(40, 15, 10, 0.06);
+}
+
+.chapter-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.1rem, 4.6vw, 2.9rem);
+  color: var(--ink-primary);
+  font-weight: 700;
+  letter-spacing: 0.8px;
+  line-height: 1.2;
+  text-shadow: 0 1px 0 rgba(255, 252, 242, 0.95), 0 2px 6px rgba(70, 25, 35, 0.12);
+}
+
+.chapter-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  font-size: 1.15rem;
+  color: var(--gold-secondary);
+  margin-top: 8px;
+  letter-spacing: 4px;
+  opacity: 0.95;
+  text-shadow: 0 0 10px var(--gold-glow);
+}
+
+.chapter-divider::before,
+.chapter-divider::after {
+  content: '';
+  height: 1.5px;
+  width: 55px;
+  background: linear-gradient(to right, transparent, #c29933, transparent);
+  display: inline-block;
+}
+
+/* CHAPTER I: PROLOGUE GREETING CARD (Inspired by Reference) */
+.prologue-card {
+  position: relative;
+  background: #fffdf8;
+  border: 2.5px solid #2d1418;
+  border-radius: 12px;
+  padding: 34px 24px 26px 24px;
+  max-width: 580px;
+  margin: 12px auto 18px auto;
+  box-shadow: 
+    6px 8px 0 rgba(45, 20, 24, 0.22),
+    0 16px 36px rgba(40, 20, 10, 0.14);
+}
+
+/* Translucent vintage washi tape pinning the prologue card */
+.prologue-card::before {
+  content: "";
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 80px;
+  height: 20px;
+  background: rgba(255, 245, 230, 0.85);
+  border: 1.5px dashed rgba(45, 20, 24, 0.35);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 5;
+}
+
+/* VINTAGE STORYBOOK PAGE TYPOGRAPHY */
+.page-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.3rem, 5.5vw, 3.4rem);
+  font-weight: 700;
+  color: var(--ink-primary);
+  margin-bottom: 8px;
+  line-height: 1.18;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 1px rgba(255, 252, 242, 0.9);
+}
+
+.hero-title {
+  font-family: var(--font-title);
+  font-size: clamp(2.5rem, 6vw, 3.8rem);
+  font-weight: 700;
+  color: var(--ink-primary);
+  margin-bottom: 8px;
+  line-height: 1.15;
+}
+
+.page-subtitle {
+  font-family: var(--font-serif);
+  font-size: clamp(1.10rem, 2.3vw, 1.25rem);
+  color: var(--ink-secondary);
+  font-weight: 500;
+  line-height: 1.65;
+  text-shadow: 0 1px 0 rgba(255, 252, 245, 0.8);
+}
+
+.hero-subtitle {
+  font-family: var(--font-hand);
+  font-size: clamp(1.4rem, 3.2vw, 1.75rem);
+  color: var(--wine-accent);
+  font-weight: 700;
+  line-height: 1.35;
+  margin: 10px 0;
+}
+
+.hero-note {
+  font-family: var(--font-hand);
+  font-size: clamp(1.18rem, 2.6vw, 1.38rem);
+  color: #7a542b;
+  font-weight: 600;
+  margin-top: 8px;
+}
+
+.page-ornament {
+  font-size: 2rem;
+  color: var(--wine-accent);
+  margin: 12px 0 0 0;
+  opacity: 0.85;
+}
+
+/* TRADITIONAL NOVEL FOOTER PAGE NUMBERS */
+.page-footer {
+  text-align: center;
+  padding-top: 14px;
+  border-top: 1px solid rgba(207, 187, 151, 0.45);
+  margin-top: 15px;
+}
+
+.page-number {
+  font-family: var(--font-title);
+  font-size: 0.96rem;
+  color: var(--ink-muted);
+  font-weight: 700;
+  letter-spacing: 3.5px;
+  text-shadow: 0 1px 0 rgba(255, 252, 245, 0.9);
+}
+
+/* ==========================================================================
+   VINTAGE BOOK BUTTONS (GOLD-FOIL EMBOSSED LEATHER & PARCHMENT RIBBONS)
+   ========================================================================== */
+.nav-controls {
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+  margin-top: 22px;
+  width: 100%;
+}
+
+.single-btn { justify-content: center; }
+
+.btn-gold-book, .btn-book-sec {
+  border: none;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  letter-spacing: 1.6px;
+  font-weight: 700;
+  text-transform: uppercase;
+  border-radius: var(--radius-sm);
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.4, 1);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 13px 26px;
+  min-width: 145px;
+}
+
+/* PRIMARY BUTTON: CHUNKY 3D ANTIQUE WAX & LEATHER STAMP (Inspired by Reference) */
+.btn-gold-book {
+  font-family: var(--font-chunky);
+  font-weight: 800;
+  font-size: 0.88rem;
+  letter-spacing: 1.2px;
+  background: linear-gradient(135deg, #421118 0%, #200508 100%);
+  color: #faecc5;
+  border: 2.5px solid #1a0408;
+  border-radius: 14px;
+  box-shadow: 
+    4px 5px 0 #1a0408,
+    0 6px 18px rgba(34, 6, 9, 0.4);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 13px 26px;
+  min-width: 155px;
+}
+
+.btn-gold-book:hover:not(:disabled) {
+  background: linear-gradient(135deg, #581822 0%, #2c080e 100%);
+  border-color: #ffd700;
+  color: #ffffff;
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 
+    5px 7px 0 #1a0408,
+    0 10px 24px rgba(223, 185, 67, 0.4);
+}
+
+.btn-gold-book:active:not(:disabled) {
+  transform: translateY(3px) translateX(2px) scale(0.98);
+  box-shadow: 1px 1px 0 #1a0408;
+}
+
+/* SECONDARY BUTTON: CHUNKY 3D PARCHMENT STAMP */
+.btn-book-sec {
+  font-family: var(--font-chunky);
+  font-weight: 700;
+  font-size: 0.84rem;
+  letter-spacing: 1px;
+  background: #fffdf7;
+  border: 2.5px solid #2d1317;
+  border-radius: 14px;
+  color: #2d1317;
+  box-shadow: 
+    4px 4px 0 #2d1317,
+    0 4px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  padding: 12px 22px;
+}
+
+.btn-book-sec:hover {
+  background: #fdf2f4;
+  border-color: var(--wine-accent);
+  color: var(--wine-accent);
+  transform: translateY(-2px);
+  box-shadow: 5px 6px 0 #2d1317, 0 6px 16px rgba(128, 20, 32, 0.15);
+}
+
+.btn-book-sec:active {
+  transform: translateY(2px) translateX(2px) scale(0.98);
+  box-shadow: 1px 1px 0 #2d1317;
+}
+
+.disabled-btn, .btn-gold-book:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.pulse-glow {
+  animation: bookPulse 2s infinite alternate;
+}
+
+@keyframes bookPulse {
+  0% { box-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
+  100% { box-shadow: 0 0 20px rgba(212, 175, 55, 0.7); }
+}
+
+/* ==========================================================================
+/* Playful candle hint bubble banner (Inspired by Reference) */
+.cake-hint-bubble {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255, 248, 235, 0.92);
+  border: 1.5px dashed var(--gold-secondary);
+  border-radius: 30px;
+  padding: 4px 18px;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.cake-hint-text {
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  color: var(--wine-accent);
+  font-weight: 700;
+}
+
+.cake-hint-arrow {
+  font-size: 1.1rem;
+  color: var(--gold-dark);
+  animation: bounceHintArrow 1.5s infinite ease-in-out;
+}
+
+@keyframes bounceHintArrow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(3px); }
+}
+
+.cake-container {
+  margin: 12px auto 8px auto;
+  display: flex;
+  justify-content: center;
+}
+
+.real-cake {
+  position: relative;
+  width: 170px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.cake-tier {
+  position: relative;
+  border-radius: 8px 8px 4px 4px;
+  background: linear-gradient(135deg, #3d141b 0%, #260b10 100%);
+  border: 1px solid var(--gold-muted);
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.1), 0 5px 12px rgba(0, 0, 0, 0.25);
+  margin-bottom: -2px;
+}
+
+.tier-bottom { width: 160px; height: 38px; }
+.tier-middle { width: 125px; height: 32px; }
+.tier-top { width: 90px; height: 28px; }
+
+.frosting-drip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 10px;
+  background: linear-gradient(135deg, #fffaf0, #faebd7);
+  border-radius: 8px 8px 4px 4px;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.4);
+}
+
+.pearls {
+  position: absolute;
+  bottom: 3px;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 8px;
+}
+
+.pearls span {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #fff 0%, #eedfc8 100%);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+}
+
+.cake-plate {
+  width: 190px;
+  height: 10px;
+  background: linear-gradient(90deg, #997524, #edd693, #997524);
+  border-radius: 50%;
+  margin-top: 2px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+.candle {
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 8px;
+  height: 24px;
+  background: repeating-linear-gradient(45deg, #fdf8ee, #fdf8ee 4px, var(--wine-accent) 4px, var(--wine-accent) 8px);
+  border-radius: 3px;
+  z-index: 10;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+/* Warm pulsating candlelight aura */
+.candle::after {
+  content: "";
+  position: absolute;
+  top: -24px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.45) 0%, rgba(255, 120, 0, 0.18) 45%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  animation: flameAuraPulse 1.4s infinite alternate ease-in-out;
+}
+
+@keyframes flameAuraPulse {
+  0% { transform: translateX(-50%) scale(0.9); opacity: 0.7; }
+  100% { transform: translateX(-50%) scale(1.18); opacity: 1; }
+}
+
+.flame {
+  position: absolute;
+  top: -15px;
+  left: -2px;
+  width: 12px;
+  height: 17px;
+  background: radial-gradient(ellipse at bottom, #fff 0%, #ffb703 60%, #e63946 100%);
+  border-radius: 50% 50% 20% 20%;
+  box-shadow: 0 0 14px #ffb703, 0 0 25px #e63946;
+  animation: flameFlicker 1.2s infinite alternate;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.flame.extinguished {
+  transform: scale(0) !important;
+  opacity: 0 !important;
+}
+
+@keyframes flameFlicker {
+  0% { transform: scale(1) rotate(-3deg); opacity: 0.9; }
+  100% { transform: scale(1.18) rotate(3deg); opacity: 1; }
+}
+
+.smoke {
+  position: absolute;
+  top: -18px;
+  left: -4px;
+  width: 16px;
+  height: 16px;
+  background: rgba(120, 110, 130, 0.6);
+  border-radius: 50%;
+  filter: blur(4px);
+  opacity: 0;
+  pointer-events: none;
+}
+
+.smoke.active { animation: riseSmoke 2s ease-out forwards; }
+@keyframes riseSmoke {
+  0% { opacity: 0.8; transform: translateY(0) scale(0.8); }
+  50% { opacity: 0.5; transform: translateY(-25px) scale(1.6); }
+  100% { opacity: 0; transform: translateY(-50px) scale(2.5); }
+}
+
+.blow-wrap-container { margin-top: 15px; }
+.blow-wrap-container.fade-out {
+  opacity: 0;
+  transform: translateY(-15px);
+  pointer-events: none;
+  height: 0;
+  margin-top: 0;
+  overflow: hidden;
+}
+
+.bday-message-container {
+  margin-top: 15px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.bday-message-container.revealed {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.bday-flower-reveal {
+  margin: 0 auto 12px auto;
+  display: flex;
+  justify-content: center;
+  position: relative;
+}
+
+/* Authentic wooden clothespin holding keepsake polaroid to page (Inspired by Reference) */
+.bday-flower-reveal::before {
+  content: "";
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 34px;
+  background: linear-gradient(90deg, #dfb478 0%, #dfb478 45%, #b58342 45%, #b58342 55%, #dfb478 55%);
+  border: 2px solid #2d1317;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  z-index: 10;
+  pointer-events: none;
+}
+
+/* Bottom handwritten script label on Polaroid card */
+.bday-flower-reveal::after {
+  content: "flowers for my prettiest girl 🌸";
+  position: absolute;
+  bottom: 8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1.5deg);
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  color: #2d1317;
+  white-space: nowrap;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.bday-flower-card-img {
+  max-width: 205px;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  padding: 10px 10px 36px 10px; /* Classic keepsake polaroid cardstock border */
+  border: 2px solid #2d1317;
+  box-shadow: 
+    6px 8px 0 rgba(45, 19, 23, 0.22),
+    0 14px 30px rgba(40, 20, 10, 0.22);
+  background: #ffffff;
+  display: block;
+  transform: rotate(-1.5deg);
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.4, 1), box-shadow 0.4s ease;
+}
+
+.bday-flower-card-img:hover {
+  transform: scale(1.05) rotate(0deg);
+  box-shadow: 
+    8px 12px 0 rgba(45, 19, 23, 0.28),
+    0 18px 40px rgba(40, 20, 10, 0.35);
+}
+
+.birthday-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 5vw, 2.8rem);
+  color: var(--ink-primary);
+  letter-spacing: 4px;
+  font-weight: 700;
+}
+
+.birthday-name {
+  font-family: var(--font-script);
+  font-size: clamp(3.2rem, 8vw, 5.2rem);
+  color: var(--wine-accent);
+  line-height: 1.1;
+  margin: 6px 0;
+}
+
+.birthday-sub { 
+  font-family: var(--font-serif);
+  font-size: 1.15rem; 
+  color: var(--ink-secondary); 
+  font-style: italic;
+}
+
+/* ==========================================================================
+   CHAPTER III: VINTAGE BURGUNDY & WAX LETTER ENVELOPE
+   ========================================================================== */
+.envelope-wrapper {
+  margin: 1.2rem auto 0.6rem auto;
+  perspective: 1200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#envelope-hint-text {
+  font-family: var(--font-hand);
+  font-size: 1.4rem;
+  color: var(--wine-accent);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+
+.envelope {
+  position: relative;
+  width: 560px;
+  max-width: 95%;
+  height: 250px;
+  background: #361219;
+  border-radius: 12px;
+  box-shadow: 
+    6px 8px 0 rgba(45, 20, 24, 0.3),
+    0 16px 40px rgba(0, 0, 0, 0.5);
+  border: 2px dashed rgba(212, 175, 55, 0.45);
+}
+
+.envelope-back { 
+  position: absolute; 
+  width: 100%; 
+  height: 100%; 
+  background: #25090e; 
+  border-radius: 12px; 
+}
+
+.envelope-front {
+  position: absolute;
+  width: 0; height: 0; z-index: 3;
+  border-left: 280px solid #3c141c;
+  border-right: 280px solid #3c141c;
+  border-bottom: 135px solid #4a1922;
+  border-top: 115px solid transparent;
+  bottom: 0; 
+  border-radius: 0 0 12px 12px; 
+  pointer-events: none;
+}
+
+.envelope-top {
+  position: absolute; top: 0; width: 0; height: 0; z-index: 4;
+  border-left: 280px solid transparent;
+  border-right: 280px solid transparent;
+  border-top: 135px solid #501b25;
+  transform-origin: top;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.envelope.open .envelope-top { transform: rotateX(180deg); z-index: 1; }
+
+/* AUTHENTIC DEEP CRIMSON WAX SEAL WITH GOLD EMBOSS (Inspired by Reference) */
+.wax-seal {
+  position: absolute; top: 92px; left: 50%; transform: translateX(-50%);
+  width: 66px; height: 66px;
+  background: radial-gradient(circle at 35% 35%, #ad2432 0%, #7e1723 60%, #520b13 100%);
+  border-radius: 50%; z-index: 5;
+  border: 2.5px solid #fae6a6;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.55),
+    0 0 15px rgba(223, 185, 67, 0.45),
+    inset 0 1px 3px rgba(255, 255, 255, 0.4);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  cursor: pointer; 
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s ease;
+}
+
+.wax-seal:hover { 
+  transform: translateX(-50%) scale(1.1); 
+  box-shadow: 0 8px 25px rgba(173, 36, 50, 0.6), 0 0 20px rgba(255, 215, 0, 0.6);
+}
+
+.wax-seal:active {
+  transform: translateX(-50%) scale(0.96);
+}
+
+.seal-heart { font-size: 1.25rem; color: #fdf5e6; }
+.seal-text { 
+  font-family: var(--font-chunky);
+  font-size: 0.68rem; 
+  color: #faebd7; 
+  font-weight: 800; 
+  letter-spacing: 1.5px; 
+}
+
+.envelope.open .wax-seal { opacity: 0; pointer-events: none; }
+
+/* AGED PARCHMENT LETTER INSIDE ENVELOPE WITH RED MARGIN LINE */
+.envelope-letter {
+  position: absolute; bottom: 10px; left: 20px;
+  width: 520px; max-width: calc(100% - 40px); height: 230px;
+  background-color: #fffdf7;
+  background-image: 
+    /* Crimson notebook margin rule */
+    linear-gradient(90deg, transparent 32px, rgba(180, 45, 65, 0.3) 32px, rgba(180, 45, 65, 0.3) 34px, transparent 34px),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 28px,
+      rgba(180, 135, 90, 0.28) 28px,
+      rgba(180, 135, 90, 0.28) 29px
+    );
+  border: 2px solid #2d1418;
+  border-radius: 8px; 
+  padding: 22px 28px 20px 44px; z-index: 2;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s, height 0.8s ease 0.4s;
+  box-shadow: 0 -4px 18px rgba(0,0,0,0.22), inset 0 0 15px var(--parchment-aged-edge);
+  text-align: left; overflow: hidden;
+}
+
+.envelope.open .envelope-letter { 
+  transform: translateY(-80px); 
+  height: 310px; 
+  z-index: 5;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.envelope.open .envelope-letter::-webkit-scrollbar {
+  display: none;
+}
+
+.letter-content {
+  display: block;
+  width: 100%;
+}
+
+.letter-salutation { 
+  font-family: var(--font-calligraphy); 
+  font-size: 1.45rem; 
+  font-weight: 700; 
+  color: var(--wine-accent); 
+  margin-bottom: 8px; 
+  line-height: 1.25;
+}
+
+.letter-body { 
+  font-family: var(--font-calligraphy); 
+  font-size: 1.15rem; 
+  font-weight: 500;
+  color: var(--ink-primary); 
+  line-height: 1.62; 
+  letter-spacing: 0.3px;
+  text-align: left; 
+  margin: 0 0 10px 0; 
+  white-space: pre-line;
+  min-height: auto;
+}
+
+/* AUTHENTIC CALLIGRAPHY FOUNTAIN PEN WRITING ANIMATION */
+.letter-body.typing::after,
+.typewriter-text.typing::after,
+.scrap-modal-body.typing::after,
+.future-modal-body.typing::after,
+.final-body.typing::after {
+  content: "";
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32' width='32' height='32'%3E%3Cpath d='M29 3 C27 7 23 12 17 17 L13 21 L11 19 L15 15 C20 9 25 5 29 3 Z' fill='%23f5ede0' stroke='%238c6d23' stroke-width='0.75'/%3E%3Cpath d='M29 3 C24 10 18 16 11 21' stroke='%23b8902f' stroke-width='1.1' fill='none'/%3E%3Cpath d='M27 6 C23 7 20 10 18 14' stroke='%23d8cbb5' stroke-width='0.75' fill='none'/%3E%3Cpath d='M24 9 C21 11 18 14 16 17' stroke='%23d8cbb5' stroke-width='0.75' fill='none'/%3E%3Cpolygon points='9 19 13 21 11 24 7 22' fill='%23d4af37' stroke='%23664f16' stroke-width='0.5'/%3E%3Cpolygon points='7 22 11 24 6 28 3 29' fill='%23fae6a6' stroke='%238c6d23' stroke-width='0.5'/%3E%3Cline x1='3' y1='29' x2='8' y2='23' stroke='%2325160c' stroke-width='0.8'/%3E%3Ccircle cx='8' cy='23' r='0.75' fill='%2325160c'/%3E%3Ccircle cx='3' cy='29' r='1.3' fill='%23881926'/%3E%3C/svg%3E");
+  background-size: contain;
+  background-repeat: no-repeat;
+  vertical-align: -4px;
+  margin-left: 2px;
+  transform-origin: 3px 29px;
+  animation: quillWritingHand 0.22s infinite alternate ease-in-out;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.25));
+}
+
+@keyframes quillWritingHand {
+  0% { transform: rotate(0deg) translateY(0); }
+  30% { transform: rotate(-7deg) translateY(-1.5px); }
+  70% { transform: rotate(5deg) translateY(0.5px); }
+  100% { transform: rotate(-3deg) translateY(-0.8px); }
+}
+
+.letter-signature { 
+  font-family: var(--font-calligraphy); 
+  font-size: 1.45rem; 
+  color: var(--wine-accent); 
+  text-align: right; 
+  font-weight: 700; 
+  margin-top: 10px; 
+  line-height: 1.25;
+}
+
+/* ==========================================================================
+   CHAPTER IV: AUTHENTIC PERSONAL HANDWRITTEN STATIONERY
+   ========================================================================== */
+.glass-card-book {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  position: relative;
+}
+
+/* Authentic romantic postal air mail stamp (Inspired by Reference) */
+.glass-card-book::before {
+  content: "AIR MAIL • WITH LOVE 💌";
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  font-family: var(--font-chunky);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: #7a121d;
+  background: rgba(255, 245, 235, 0.9);
+  border: 1.5px dashed #7a121d;
+  border-radius: 4px;
+  padding: 3px 10px;
+  transform: rotate(6deg);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.card-decorative-stars { 
+  font-size: 1rem; 
+  color: var(--gold-secondary); 
+  margin-bottom: 0.35rem; 
+  letter-spacing: 6px; 
+}
+.card-footer-heart { font-size: 1.2rem; margin-top: 0.4rem; color: var(--wine-accent); }
+
+/* NOTEBOOK PAPER WITH MATHEMATICALLY ALIGNED RULED LINES & WASHI TAPE */
+.handwritten-paper {
+  position: relative;
+  background-color: #fffdf7;
+  background-image: 
+    /* Soft crimson notebook margin rule inspired by reference */
+    linear-gradient(90deg, transparent 40px, rgba(180, 45, 65, 0.32) 40px, rgba(180, 45, 65, 0.32) 42px, transparent 42px),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 29px,
+      rgba(180, 135, 90, 0.32) 29px,
+      rgba(180, 135, 90, 0.32) 30px
+    );
+  background-position: 0 0, 0 8px;
+  line-height: 30px;
+  border-radius: 8px;
+  padding: 22px 34px 20px 52px;
+  border: 2px solid #2d1418;
+  border-left: 6px solid var(--wine-accent);
+  text-align: left;
+  box-shadow: 
+    5px 6px 0 rgba(45, 20, 24, 0.18),
+    0 12px 28px rgba(40, 20, 10, 0.12),
+    inset 0 0 20px var(--parchment-aged-edge);
+}
+
+/* Translucent vintage washi tape strips at top corners holding paper */
+.handwritten-paper::before,
+.handwritten-paper::after {
+  content: "";
+  position: absolute;
+  top: -9px;
+  width: 58px;
+  height: 20px;
+  background: rgba(255, 248, 230, 0.72);
+  backdrop-filter: blur(2px);
+  border: 1px solid rgba(180, 140, 90, 0.35);
+  box-shadow: 0 2px 6px rgba(40, 20, 10, 0.12);
+  z-index: 5;
+  pointer-events: none;
+}
+
+.handwritten-paper::before {
+  left: 24px;
+  transform: rotate(-3.5deg);
+}
+
+.handwritten-paper::after {
+  right: 24px;
+  transform: rotate(3deg);
+}
+
+.typewriter-text {
+  font-family: var(--font-calligraphy);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 30px;
+  letter-spacing: 0.3px;
+  color: var(--ink-primary);
+  white-space: pre-line;
+  word-break: break-word;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+}
+
+/* ==========================================================================
+   CHAPTER V: UNAKU THERIYAMA NEE ENAKAGA SENJADHU (PARCHMENT SCRAP NOTES)
+   ========================================================================== */
+.ch5-header { margin-bottom: 8px; }
+.ch5-header .chapter-title {
+  font-size: clamp(1.6rem, 3.2vw, 2.2rem);
+  margin-bottom: 2px;
+}
+.ch5-header .chapter-divider {
+  margin-top: 4px;
+  letter-spacing: 4px;
+}
+
+.ch5-subtitle-wrap {
+  margin: 0 auto 10px auto;
+  max-width: 680px;
+}
+
+.ch5-intro-subheading {
+  font-family: var(--font-title);
+  font-size: 1.12rem;
+  color: var(--wine-accent);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.ch5-subtitle-text {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--ink-secondary);
+  font-style: italic;
+  line-height: 1.35;
+}
+
+.ch5-counter-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 14px;
+  border-radius: 50px;
+  background: #f3e5ce;
+  border: 1px solid var(--parchment-border);
+  color: var(--wine-accent);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+}
+
+.counter-icon { font-size: 0.82rem; }
+
+/* 6 PARCHMENT SCRAP NOTES (ANTIQUE VINTAGE STATIONERY WITH WASHI TAPE & 3D CORNER CURLS) */
+.parchment-scraps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px 14px;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 8px 4px;
+}
+
+.parchment-scrap-item {
+  position: relative;
+  background: #fffdf7;
+  border: 2.5px solid #2d1418;
+  border-radius: 8px;
+  padding: 18px 10px 14px 10px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 
+    4px 5px 0 #2d1418,
+    0 8px 18px rgba(40, 20, 10, 0.12);
+  text-align: center;
+  overflow: hidden;
+}
+
+/* Individual playful scrapbook tilts and warm pastel tones */
+.parchment-scrap-item:nth-child(1) { transform: rotate(-3deg); background-color: #fffdf7; }
+.parchment-scrap-item:nth-child(2) { transform: rotate(2.6deg); background-color: #fff2f5; }
+.parchment-scrap-item:nth-child(3) { transform: rotate(-1.8deg); background-color: #fff9e8; }
+.parchment-scrap-item:nth-child(4) { transform: rotate(3.2deg); background-color: #f4f9f3; }
+.parchment-scrap-item:nth-child(5) { transform: rotate(-2.4deg); background-color: #fbf3fb; }
+.parchment-scrap-item:nth-child(6) { transform: rotate(2deg); background-color: #fef5ec; }
+
+.parchment-scrap-item:hover {
+  transform: translateY(-8px) rotate(0deg) scale(1.06) !important;
+  box-shadow: 
+    6px 9px 0 #2d1418,
+    0 18px 36px rgba(40, 20, 10, 0.28);
+  border-color: var(--wine-accent);
+  z-index: 20;
+}
+
+.parchment-scrap-item:active {
+  transform: translateY(2px) translateX(2px) scale(0.98) !important;
+  box-shadow: 1px 1px 0 #2d1418;
+}
+
+/* Translucent frosted washi tape pinning each note */
+.parchment-scrap-item::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-1deg);
+  width: 52px;
+  height: 18px;
+  background: rgba(255, 248, 230, 0.82);
+  backdrop-filter: blur(2px);
+  border: 1.5px dashed rgba(45, 20, 24, 0.35);
+  box-shadow: 0 1px 4px rgba(40, 20, 10, 0.12);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 3D Tactile dog-ear curled corner fold (Inspired by Reference) */
+.parchment-scrap-item::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, transparent 50%, rgba(45, 20, 24, 0.22) 50%, #ecd6b2 62%, #fffdf7 100%);
+  border-left: 2px solid #2d1418;
+  border-top: 2px solid #2d1418;
+  border-top-left-radius: 5px;
+  box-shadow: -2px -2px 4px rgba(40, 20, 10, 0.12);
+  transition: width 0.25s ease, height 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.parchment-scrap-item:hover::after {
+  width: 32px;
+  height: 32px;
+  transform: scale(1.1);
+}
+
+.parchment-scrap-item.opened {
+  border-color: var(--wine-accent);
+  background: #ffffff;
+}
+
+.scrap-pin {
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.1rem;
+  line-height: 1;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.4));
+  z-index: 4;
+}
+
+.scrap-tag {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  color: var(--wine-accent);
+  font-weight: 700;
+  margin-bottom: 2px;
+}
+
+.scrap-title {
+  font-family: var(--font-chunky);
+  font-size: 1.05rem;
+  color: var(--ink-primary);
+  font-weight: 800;
+  line-height: 1.22;
+  margin-bottom: 4px;
+}
+
+.scrap-tap-hint {
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  color: #7a542b;
+  font-weight: 600;
+}
+
+/* COMPLETION MESSAGE */
+.ch5-completion-msg {
+  margin: 6px 0;
+  padding: 6px 14px;
+  background: #fbf3e2;
+  border: 1px solid var(--gold-secondary);
+  border-radius: var(--radius-sm);
+  box-shadow: inset 0 0 10px var(--parchment-aged-edge);
+  animation: softGlowPop 0.5s ease;
+}
+
+@keyframes softGlowPop {
+  0% { opacity: 0; transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.ch5-completion-text {
+  font-family: var(--font-title);
+  font-size: 1.05rem;
+  color: var(--wine-accent);
+  font-weight: 700;
+  letter-spacing: 0.3px;
+}
+
+.ch5-page-transition-line { margin: 4px 0 8px 0; }
+.transition-quote {
+  font-family: var(--font-serif);
+  font-size: 0.92rem;
+  color: var(--ink-muted);
+  font-style: italic;
+}
+
+.ch5-nav {
+  margin-top: 8px;
+  display: flex;
+  gap: 16px;
+  justify-content: center;
+  align-items: center;
+}
+
+/* EXPANDED SCRAP NOTE MODAL */
+.scrap-modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(14, 8, 5, 0.88); backdrop-filter: blur(12px);
+  z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+
+.scrap-modal-overlay.hidden { display: none !important; opacity: 0; pointer-events: none; }
+
+.scrap-paper-card {
+  max-width: 500px;
+  width: 100%;
+  position: relative;
+  text-align: left;
+  background-color: #fffdf7;
+  background-image: 
+    /* Soft crimson notebook margin rule inspired by reference */
+    linear-gradient(90deg, transparent 38px, rgba(180, 45, 65, 0.3) 38px, rgba(180, 45, 65, 0.3) 40px, transparent 40px),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      rgba(180, 135, 90, 0.28) 31px,
+      rgba(180, 135, 90, 0.28) 32px
+    );
+  border: 2.5px solid #2d1418;
+  border-left: 6px solid var(--wine-accent);
+  border-radius: 8px;
+  padding: 34px 28px 24px 48px;
+  box-shadow: 
+    6px 8px 0 rgba(45, 20, 24, 0.3),
+    0 25px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 25px var(--parchment-aged-edge);
+  animation: scrapPaperExpand 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+@keyframes scrapPaperExpand {
+  0% { transform: scale(0.85) translateY(20px); opacity: 0; }
+  100% { transform: scale(1) translateY(0); opacity: 1; }
+}
+
+.scrap-pin-decoration {
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 1.5rem;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,0.4));
+}
+
+.scrap-paper-inner { width: 100%; }
+
+.scrap-modal-num {
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  letter-spacing: 2px;
+  color: var(--wine-accent);
+  font-weight: 700;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.scrap-modal-title {
+  font-family: var(--font-title);
+  font-size: 1.5rem;
+  color: var(--ink-primary);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.scrap-modal-heading {
+  font-family: var(--font-serif);
+  font-size: 0.98rem;
+  color: var(--wine-accent);
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--parchment-border);
+}
+
+.scrap-modal-body {
+  font-family: var(--font-calligraphy);
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: var(--ink-primary);
+  line-height: 1.62;
+  letter-spacing: 0.3px;
+  white-space: pre-line;
+  margin-bottom: 20px;
+  min-height: 90px;
+}
+
+.scrap-modal-footer { text-align: center; }
+
+/* ==========================================================================
+   CHAPTER VI: THE PAGES WE HAVEN'T WRITTEN YET... (PARCHMENT NOTES)
+   ========================================================================== */
+.future-notes-grid,
+.envelopes-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 14px;
+  width: 100%;
+}
+
+.future-note-item,
+.open-when-item {
+  position: relative;
+  background: #fffdf8;
+  border: 2.5px solid #2d1418;
+  border-radius: 8px;
+  padding: 22px 10px 14px 10px;
+  cursor: pointer;
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+  box-shadow: 
+    4px 5px 0 #2d1418,
+    0 8px 18px rgba(40, 20, 10, 0.12);
+  text-align: center;
+  outline: none;
+  overflow: hidden;
+}
+
+/* Individual playful postcard tilts and pastel tones */
+.future-note-item:nth-child(1) { transform: rotate(-2.5deg); background-color: #fffdf8; }
+.future-note-item:nth-child(2) { transform: rotate(2deg); background-color: #fff4f6; }
+.future-note-item:nth-child(3) { transform: rotate(-1.5deg); background-color: #fff9e8; }
+.future-note-item:nth-child(4) { transform: rotate(2.5deg); background-color: #f4f8f4; }
+.future-note-item:nth-child(5) { transform: rotate(-2deg); background-color: #fbf4fb; }
+
+.future-note-item:hover,
+.future-note-item:focus-visible,
+.open-when-item:hover {
+  transform: translateY(-8px) rotate(0deg) scale(1.06) !important;
+  box-shadow: 
+    6px 9px 0 #2d1418,
+    0 18px 36px rgba(40, 20, 10, 0.28);
+  border-color: #c29933;
+  z-index: 20;
+}
+
+.future-note-item:active {
+  transform: translateY(2px) translateX(2px) scale(0.98) !important;
+  box-shadow: 1px 1px 0 #2d1418;
+}
+
+/* Translucent vintage tape at top */
+.future-note-item::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(1deg);
+  width: 50px;
+  height: 18px;
+  background: rgba(255, 248, 230, 0.82);
+  backdrop-filter: blur(2px);
+  border: 1.5px dashed rgba(45, 20, 24, 0.35);
+  box-shadow: 0 1px 4px rgba(40, 20, 10, 0.12);
+  z-index: 2;
+  pointer-events: none;
+}
+
+/* 3D Curled dog-ear corner fold inspired by reference */
+.future-note-item::after {
+  content: "";
+  position: absolute;
+  right: -2px;
+  bottom: -2px;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, transparent 50%, rgba(45, 20, 24, 0.22) 50%, #ecd6b2 62%, #fffdf8 100%);
+  border-left: 2px solid #2d1418;
+  border-top: 2px solid #2d1418;
+  border-top-left-radius: 5px;
+  box-shadow: -2px -2px 4px rgba(40, 20, 10, 0.12);
+  transition: width 0.25s ease, height 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+  z-index: 3;
+}
+
+.future-note-item:hover::after {
+  width: 32px;
+  height: 32px;
+  transform: scale(1.1);
+}
+
+.future-note-item.unfolded {
+  border-color: #d4af37;
+  background: #ffffff;
+}
+
+.future-note-icon,
+.open-when-icon { 
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #fff9e6 0%, #eed594 55%, #c29933 100%);
+  border: 2px solid #2d1418;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15), inset 0 1px 2px rgba(255, 255, 255, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.45rem;
+  margin: 0 auto 6px auto;
+  filter: drop-shadow(0 2px 3px rgba(0,0,0,0.15));
+}
+
+.future-note-badge {
+  display: inline-block;
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: #7a121d;
+  margin-bottom: 3px;
+}
+
+.future-note-title,
+.open-when-label { 
+  font-family: var(--font-chunky);
+  font-size: 1.02rem; 
+  font-weight: 800; 
+  color: var(--ink-primary); 
+  margin-bottom: 4px; 
+  line-height: 1.22;
+}
+
+.future-tap-hint {
+  display: block;
+  font-family: var(--font-hand);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #7a542b;
+}
+
+/* CHAPTER VI ENDING NOSTALGIC QUOTE */
+.future-story-quote-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-top: 24px;
+  margin-bottom: 8px;
+  padding: 12px 18px;
+  border-top: 1px dashed rgba(139, 90, 43, 0.25);
+  border-bottom: 1px dashed rgba(139, 90, 43, 0.25);
+  background: rgba(253, 248, 238, 0.5);
+  border-radius: var(--radius-sm);
+}
+
+.future-story-quote {
+  font-family: var(--font-title);
+  font-size: 1.22rem;
+  font-weight: 600;
+  font-style: italic;
+  color: #6d4218;
+  letter-spacing: 0.04em;
+  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8);
+  margin: 0;
+}
+
+.quote-filigree {
+  color: #c99b4e;
+  font-size: 0.95rem;
+  opacity: 0.85;
+}
+
+/* CHAPTER VI FUTURE PAPER UNFOLD MODAL */
+.future-paper-card {
+  position: relative;
+  width: 100%;
+  max-width: 520px;
+  background-color: #fffdf7;
+  background-image: 
+    /* Soft crimson notebook margin rule inspired by reference */
+    linear-gradient(90deg, transparent 38px, rgba(180, 45, 65, 0.3) 38px, rgba(180, 45, 65, 0.3) 40px, transparent 40px),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      rgba(180, 135, 90, 0.28) 31px,
+      rgba(180, 135, 90, 0.28) 32px
+    );
+  border: 2.5px solid #2d1418;
+  border-left: 6px solid var(--gold-secondary);
+  border-radius: 8px;
+  padding: 36px 30px 24px 48px;
+  box-shadow: 
+    6px 8px 0 rgba(45, 20, 24, 0.3),
+    0 25px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 25px var(--parchment-aged-edge);
+  transform-origin: top center;
+  animation: paperUnfold3D 0.45s cubic-bezier(0.2, 0.9, 0.3, 1.1) forwards;
+}
+
+@keyframes paperUnfold3D {
+  0% {
+    opacity: 0;
+    transform: perspective(800px) rotateX(-25deg) scale(0.92);
+  }
+  100% {
+    opacity: 1;
+    transform: perspective(800px) rotateX(0deg) scale(1);
+  }
+}
+
+.future-paper-inner { text-align: center; }
+
+.future-modal-tag {
+  display: inline-block;
+  font-family: var(--font-title);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #8b5a2b;
+  background: rgba(139, 90, 43, 0.09);
+  border: 1px solid rgba(139, 90, 43, 0.25);
+  border-radius: 12px;
+  padding: 3px 12px;
+  margin-bottom: 12px;
+}
+
+.future-modal-title {
+  font-family: var(--font-title);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--ink-primary);
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.future-modal-heading {
+  font-family: var(--font-serif);
+  font-size: 1.02rem;
+  color: var(--wine-accent);
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 14px;
+  padding-bottom: 8px;
+  border-bottom: 1px dashed var(--parchment-border);
+}
+
+.future-modal-body {
+  font-family: var(--font-calligraphy);
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--ink-primary);
+  line-height: 1.62;
+  letter-spacing: 0.3px;
+  text-align: left;
+  white-space: pre-line;
+  background: rgba(255, 255, 255, 0.45);
+  padding: 16px 20px;
+  border-radius: var(--radius-sm);
+  border-left: 3px solid #c99b4e;
+  margin-bottom: 20px;
+  min-height: 90px;
+}
+
+.future-modal-footer { text-align: center; }
+
+/* MOOD MODAL OVERLAY */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+  background: rgba(14, 8, 5, 0.88); backdrop-filter: blur(12px);
+  z-index: 2000; display: flex; align-items: center; justify-content: center; padding: 20px;
+}
+
+.modal-overlay.hidden { display: none !important; opacity: 0; pointer-events: none; }
+
+.modal-close { 
+  position: absolute; top: 12px; right: 16px; 
+  background: none; border: none; 
+  color: var(--ink-muted); font-size: 1.5rem; 
+  cursor: pointer; transition: color 0.2s ease;
+}
+.modal-close:hover { color: var(--wine-accent); }
+
+/* ==========================================================================
+   CHAPTER VII: INTERACTIVE 3D POP-UP HUG CARD
+   ========================================================================== */
+.ch7-header { margin-bottom: 6px; }
+
+.hug-subtitle {
+  font-family: var(--font-calligraphy);
+  font-size: 1.25rem;
+  color: var(--wine-accent);
+  margin-bottom: 10px;
+  font-weight: 600;
+}
+
+.hug-card-wrapper {
+  margin: 4px auto 8px auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+.hug-card-container {
+  position: relative;
+  width: 250px;
+  height: 252px;
+  cursor: pointer;
+  perspective: 1200px;
+  border-radius: 12px;
+  box-shadow: 
+    6px 8px 0 rgba(45, 20, 24, 0.22),
+    0 16px 36px rgba(40, 20, 10, 0.25);
+  border: 2.5px solid #2d1418;
+  overflow: hidden;
+  transition: width 0.65s cubic-bezier(0.22, 1, 0.36, 1), height 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.4s ease, box-shadow 0.4s ease;
+  user-select: none;
+  background: #fdfaf3;
+}
+
+.hug-card-container:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 
+    8px 12px 0 rgba(45, 20, 24, 0.28),
+    0 22px 50px rgba(40, 20, 10, 0.38);
+}
+
+.hug-card-container:focus-visible {
+  outline: 3px solid var(--gold-primary);
+  outline-offset: 4px;
+}
+
+.hug-card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+  transition: transform 0.65s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.5s ease;
+  will-change: transform, opacity;
+  display: block;
+}
+
+.hug-card-img.closed {
+  opacity: 1;
+  transform: scale(1) rotateX(0deg);
+  z-index: 2;
+}
+
+.hug-card-img.opened {
+  opacity: 0;
+  transform: scale(0.92) rotateX(-20deg);
+  z-index: 1;
+}
+
+/* OPEN STATE: 3D Unfolding Pop-Up Card Transition */
+.hug-card-container.is-open {
+  width: 250px;
+  height: 335px;
+}
+
+.hug-card-container.is-open .hug-card-img.closed {
+  opacity: 0;
+  transform: scale(0.92) rotateX(20deg);
+  pointer-events: none;
+}
+
+.hug-card-container.is-open .hug-card-img.opened {
+  opacity: 1;
+  transform: scale(1) rotateX(0deg);
+  z-index: 3;
+}
+
+.hug-card-badge {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #421118 0%, #200508 100%);
+  color: #faecc5;
+  border: 2.5px solid #1a0408;
+  padding: 8px 24px;
+  border-radius: 50px;
+  font-family: var(--font-chunky);
+  font-size: 0.86rem;
+  letter-spacing: 1.2px;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 4px 4px 0 #1a0408, 0 6px 16px rgba(0, 0, 0, 0.25);
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  user-select: none;
+}
+
+.hug-card-badge:hover {
+  transform: translateY(-2px) scale(1.04);
+  background: linear-gradient(135deg, #581822 0%, #2c080e 100%);
+  border-color: #ffd700;
+  color: #ffffff;
+  box-shadow: 5px 6px 0 #1a0408, 0 8px 24px rgba(223, 185, 67, 0.4);
+}
+
+.hug-card-badge:active {
+  transform: translateY(2px) translateX(2px) scale(0.98);
+  box-shadow: 1px 1px 0 #1a0408;
+}
+
+.hug-card-container.is-open ~ .hug-card-badge {
+  background: linear-gradient(135deg, #7a121d 0%, #4a0911 100%);
+  color: #ffffff;
+  border-color: #ffd700;
+  box-shadow: 4px 4px 0 #1a0408, 0 6px 18px rgba(212, 175, 55, 0.35);
+}
+
+/* ==========================================================================
+   CHAPTER VIII: FINAL EPILOGUE (ROMANTIC LOVE LETTER TO SADHANA)
+   ========================================================================== */
+.final-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 0 4px;
+}
+
+.final-header {
+  text-align: center;
+  margin-bottom: 4px;
+}
+
+.final-header-flourish {
+  font-size: 0.95rem;
+  color: var(--gold-secondary);
+  letter-spacing: 6px;
+  margin-bottom: 2px;
+}
+
+.final-title { 
+  font-family: var(--font-title); 
+  font-size: clamp(1.48rem, 4vw, 2.05rem); 
+  font-weight: 700; 
+  color: var(--ink-primary); 
+  line-height: 1.2;
+  margin: 0;
+  letter-spacing: 0.5px;
+}
+
+.final-subtitle { 
+  font-family: var(--font-serif);
+  font-size: clamp(0.90rem, 2.2vw, 1.05rem); 
+  color: var(--ink-secondary); 
+  font-weight: 500; 
+  font-style: italic;
+  margin: 2px 0 0 0;
+}
+
+/* Soft romantic parchment letter note */
+.final-love-letter {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  margin: 10px auto 6px auto;
+  padding: 14px 20px 12px 20px;
+  background: rgba(254, 250, 240, 0.88);
+  background-image: 
+    linear-gradient(to right, rgba(40, 20, 10, 0.03) 0%, transparent 8%, transparent 92%, rgba(40, 20, 10, 0.03) 100%),
+    linear-gradient(135deg, rgba(255, 255, 255, 0.92) 0%, rgba(246, 237, 218, 0.78) 100%);
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: var(--radius-md);
+  box-shadow: 
+    0 4px 18px rgba(70, 30, 15, 0.07),
+    inset 0 0 22px rgba(212, 175, 55, 0.1);
+  text-align: left;
+}
+
+/* Translucent vintage washi tape holding the final love letter */
+.final-love-letter::before {
+  content: '';
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-0.5deg);
+  width: 85px;
+  height: 18px;
+  background: rgba(255, 248, 235, 0.68);
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+  border: 1px dashed rgba(200, 160, 110, 0.4);
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.letter-top-salutation {
+  font-family: var(--font-calligraphy);
+  font-size: clamp(1.2rem, 2.7vw, 1.45rem);
+  color: var(--wine-accent);
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: 0.3px;
+}
+
+.final-body { 
+  font-family: var(--font-calligraphy);
+  font-size: clamp(1.08rem, 2.15vw, 1.24rem); 
+  font-weight: 500;
+  line-height: 1.65; 
+  color: var(--ink-primary); 
+  white-space: pre-line;
+  text-align: left;
+  letter-spacing: 0.3px;
+}
+
+.letter-bottom-signature {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.sig-note {
+  font-family: var(--font-calligraphy);
+  font-size: 1.05rem;
+  font-style: italic;
+  color: #5c3e29;
+}
+
+.sig-author {
+  font-family: var(--font-calligraphy);
+  font-size: clamp(1.12rem, 2.5vw, 1.36rem);
+  font-weight: 700;
+  color: var(--wine-accent);
+  letter-spacing: 0.3px;
+}
+
+/* Actions Row: surprise button, mini cake & replay */
+.final-actions-row {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  margin-top: 3px;
+}
+
+.epilogue-secret-wrap {
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+}
+
+.epilogue-surprise-btn {
+  font-family: var(--font-chunky);
+  font-weight: 800;
+  font-size: 0.86rem;
+  letter-spacing: 1.2px;
+  padding: 10px 24px;
+  border-radius: 50px;
+  border: 2.5px solid #1a0408;
+  background: linear-gradient(135deg, #44121b 0%, #200508 100%);
+  color: #ffe6a7;
+  box-shadow: 4px 4px 0 #1a0408, 0 6px 18px rgba(36, 7, 12, 0.4);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.epilogue-surprise-btn:hover {
+  transform: translateY(-2px) scale(1.04);
+  box-shadow: 5px 6px 0 #1a0408, 0 10px 24px rgba(223, 185, 67, 0.4);
+  color: #ffffff;
+  border-color: #ffd700;
+}
+
+.epilogue-surprise-btn:active {
+  transform: translateY(2px) translateX(2px) scale(0.98);
+  box-shadow: 1px 1px 0 #1a0408;
+}
+
+.mini-cake-wrap { 
+  font-size: 1.35rem; 
+  margin: 3px 0; 
+  animation: bounceMini 2s infinite ease-in-out; 
+}
+@keyframes bounceMini { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
+
+/* Page 8 compact container override */
+#page-8 { overflow-y: auto; scrollbar-width: none; -ms-overflow-style: none; padding-top: 16px; padding-bottom: 14px; }
+#page-8::-webkit-scrollbar { display: none; }
+#page-8 h1, #page-8 h2 { margin: 0; padding: 0; }
+#page-8 .nav-controls { margin-top: 4px; width: 100%; display: flex; gap: 12px; align-items: center; justify-content: center; }
+#page-8 .nav-controls .btn-gold-book,
+#page-8 .nav-controls .btn-book-sec { padding: 9px 20px; font-size: 0.82rem; min-width: unset; }
+#page-8 .page-footer { margin-top: 3px; }
+
+.epilogue-modal-card {
+  max-width: 390px;
+  width: 92%;
+  position: relative;
+  text-align: center;
+  background: #fbf5e8;
+  background-image: 
+    linear-gradient(to right, rgba(40,20,10,0.06) 0%, transparent 6%, transparent 94%, rgba(40,20,10,0.06) 100%),
+    linear-gradient(135deg, #fdf8ee 0%, #f4e8d3 100%);
+  border: 2px solid var(--gold-secondary);
+  border-radius: var(--radius-md);
+  padding: 26px 20px 18px 20px;
+  box-shadow: 
+    0 25px 60px rgba(0, 0, 0, 0.8),
+    inset 0 0 35px var(--parchment-aged-edge);
+  animation: epilogueSlowSmoothPop 0.85s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes epilogueSlowSmoothPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.82) translateY(30px);
+  }
+  65% {
+    opacity: 1;
+    transform: scale(1.015) translateY(-3px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.epilogue-img-frame {
+  margin: 14px auto 12px auto;
+  padding: 10px 10px 34px 10px;
+  border-radius: 4px;
+  box-shadow: 6px 8px 0 rgba(45, 20, 24, 0.22), 0 16px 36px rgba(40, 20, 10, 0.35);
+  border: 2px solid #2d1418;
+  max-width: 275px;
+  background: #ffffff;
+  transform: rotate(-1.5deg);
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.epilogue-img-frame:hover {
+  transform: rotate(0deg) scale(1.03);
+}
+
+.epilogue-img-frame::before {
+  content: '';
+  position: absolute;
+  top: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 34px;
+  background: linear-gradient(90deg, #dfb478 0%, #dfb478 45%, #b58342 45%, #b58342 55%, #dfb478 55%);
+  border: 2px solid #2d1418;
+  border-radius: 3px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.3);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.epilogue-popup-img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1.5px solid #2d1418;
+  border-radius: 2px;
+}
+
+.epilogue-modal-caption {
+  font-family: var(--font-hand);
+  font-size: 1.35rem;
+  color: #2d1418;
+  line-height: 1.35;
+  margin-top: 8px;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.epilogue-modal-footer {
+  display: flex;
+  justify-content: center;
+}
+
+/* TACTILE SCRAPBOOK PROGRESS BEADS */
+.progress-dots {
+  position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
+  display: flex; gap: 12px; z-index: 900;
+  background: #fffdf8;
+  padding: 8px 22px; border-radius: 50px;
+  border: 2.5px solid #2d1418;
+  box-shadow: 4px 4px 0 #2d1418, 0 8px 24px rgba(0, 0, 0, 0.25);
+}
+
+.dot { 
+  width: 10px; height: 10px; border-radius: 50%; 
+  background: #ecd6bf; 
+  border: 1.5px solid #2d1418;
+  transition: all 0.25s cubic-bezier(0.34, 1.56, 0.64, 1); 
+  cursor: pointer; 
+}
+.dot.active { 
+  background: #7a121d; 
+  border-color: #2d1418;
+  box-shadow: 0 0 10px rgba(122, 18, 29, 0.45); 
+  transform: scale(1.45); 
+}
+
+/* ==========================================================================
+   RESPONSIVE DESIGN & PROPORTIONAL SCALING
+   ========================================================================== */
+@media (max-width: 1100px) {
+  .storybook { width: 95%; max-width: 960px; min-height: 720px; }
+  .book-pages-wrapper { min-height: 720px; }
+}
+
+@media (max-width: 900px) {
+  .storybook { width: 96%; min-height: 680px; border-left-width: 16px; }
+  .storybook::before { left: -16px; width: 16px; }
+  .book-pages-wrapper { min-height: 680px; }
+  .parchment-page { padding: 28px 24px 34px 24px; }
+  .parchment-scraps-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .future-notes-grid,
+  .envelopes-grid { grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; }
+  .envelope { width: 100%; max-width: 440px; height: 220px; }
+  .envelope-letter { width: calc(100% - 30px); left: 15px; }
+  .envelope.open .envelope-letter { height: 320px; }
+  .envelope-front { border-left-width: 220px; border-right-width: 220px; border-bottom-width: 115px; }
+  .envelope-top { border-left-width: 220px; border-right-width: 220px; border-top-width: 115px; }
+}
+
+@media (max-width: 600px) {
+  .storybook-viewport { padding: 12px 6px 55px 6px; }
+  .storybook { width: 100%; min-height: calc(100vh - 68px); border-radius: 12px; border-left-width: 10px; }
+  .storybook::before { left: -10px; width: 10px; }
+  .book-pages-wrapper { min-height: calc(100vh - 68px); border-radius: 10px; }
+  .book-cover-front { padding: 14px; border-radius: 12px; }
+  .cover-border { padding: 16px 10px; border-radius: 8px; }
+  .parchment-page { padding: 18px 12px 28px 12px; overflow-y: auto; border-radius: 10px; }
+  .parchment-scraps-grid { grid-template-columns: 1fr; gap: 10px; }
+  .future-notes-grid,
+  .envelopes-grid { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .future-note-item { padding: 16px 8px 12px 8px; }
+  .envelope { width: 100%; max-width: 320px; height: 180px; }
+  .envelope-front { border-left-width: 160px; border-right-width: 160px; border-bottom-width: 90px; }
+  .envelope-top { border-left-width: 160px; border-right-width: 160px; border-top-width: 90px; }
+  .envelope.open .envelope-letter { height: 280px; transform: translateY(-110px); }
+  .nav-controls { gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+  .btn-gold-book, .btn-book-sec { padding: 10px 16px; font-size: 0.74rem; min-width: 120px; }
+  .progress-dots { bottom: 12px; padding: 6px 14px; gap: 8px; }
+  .dot { width: 7px; height: 7px; }
+  .scrap-paper-card, .future-paper-card, .epilogue-modal-card { max-height: 88vh; overflow-y: auto; padding: 22px 16px 18px 16px; }
+  .hug-card-container { width: 220px; height: 222px; }
+  .hug-card-container.is-open { width: 220px; height: 295px; }
+}
+
+@media (max-width: 380px) {
+  .birthday-name { font-size: 2.8rem; }
+  .book-title { font-size: 1.9rem; }
+  .future-notes-grid,
+  .envelopes-grid { grid-template-columns: 1fr; }
+  .btn-gold-book, .btn-book-sec { width: 100%; min-width: 100%; }
+  .nav-controls { flex-direction: column; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important; 
+    animation-iteration-count: 1 !important; 
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ==========================================================================
+   FLOATING ROMANTIC HEARTS (Inspired by reference interactive accents)
+   ========================================================================== */
+.floating-heart {
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  user-select: none;
+  animation: floatHeartAnim 2.2s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  filter: drop-shadow(0 2px 5px rgba(180, 40, 60, 0.35));
+}
+
+@keyframes floatHeartAnim {
+  0% {
+    opacity: 0;
+    transform: translate(0, 0) scale(0.4) rotate(0deg);
+  }
+  15% {
+    opacity: 0.95;
+    transform: translate(calc(var(--rand-x, 0px) * 0.3), -25px) scale(1.15) rotate(calc(var(--rand-rot, 0deg) * 0.4));
+  }
+  70% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 0;
+    transform: translate(var(--rand-x, 0px), -120px) scale(0.8) rotate(var(--rand-rot, 0deg));
+  }
+}
+

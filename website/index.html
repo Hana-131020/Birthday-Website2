@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Happy Birthday Sadhana ✨</title>
+  <meta name="description" content="An interactive 3D storybook surprise for Sadhana.">
+  
+  <!-- Google Fonts: Classic Old Vintage Storybook Typography & Calligraphy Handwriting -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@500;600;700&family=Cinzel:wght@500;600;700;800&family=Cinzel+Decorative:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Gochi+Hand&family=Marck+Script&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <link rel="stylesheet" href="style.css?v=20261011_whole_book">
+</head>
+<body>
+
+  <!-- Starry Midnight Canvas Background -->
+  <canvas id="star-canvas"></canvas>
+
+  <!-- Ambient Light Orbs -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+
+  <!-- MAIN STORYBOOK VIEWPORT -->
+  <main class="storybook-viewport">
+
+    <!-- 3D BOOK CONTAINER -->
+    <div id="storybook" class="storybook closed-book">
+      
+      <!-- HARDCOVER FRONT COVER (LOGIN PRIVACY GATE) 🔐 -->
+      <div id="book-cover" class="book-cover-front">
+        <div class="cover-border">
+          <div class="corner-filigree top-left">✦</div>
+          <div class="corner-filigree top-right">✦</div>
+          <div class="corner-filigree bottom-left">✦</div>
+          <div class="corner-filigree bottom-right">✦</div>
+          
+          <div class="cover-content text-center">
+            <div class="lock-icon-wrap">
+              <span class="lock-icon">🔑</span>
+            </div>
+            <span class="book-badge">Private Keepsake</span>
+            <h1 class="book-title">The Story of Us</h1>
+            <p class="book-subtitle">Unakaga Naan Panna Kutty Surprise ❤️</p>
+
+            <div class="login-card-book">
+              <form id="login-form" autocomplete="off" onsubmit="return false;">
+                <div class="input-group">
+                  <label for="input-username">Reader Username</label>
+                  <input type="text" id="input-username" placeholder="Enter username..." required>
+                </div>
+                <div class="input-group">
+                  <label for="input-password">Key Code (Password)</label>
+                  <input type="password" id="input-password" placeholder="Enter password..." required>
+                </div>
+                <button type="submit" id="btn-login" class="btn-gold-book full-width">
+                  <span>Book-ah Unlock Pannu Thangoo 📖✨</span>
+                </button>
+              </form>
+              <p id="login-feedback" class="login-feedback"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- INSIDE PARCHMENT PAGES -->
+      <div class="book-pages-wrapper">
+        
+        <!-- RIBBON BOOKMARK -->
+        <div class="ribbon-bookmark"></div>
+
+        <!-- CHAPTER 1: PROLOGUE ✨ -->
+        <section id="page-1" class="parchment-page active-page">
+          <div class="page-inner text-center">
+            <div class="chapter-header">
+              <span class="chapter-num">CHAPTER I</span>
+              <div class="chapter-divider">✦ 🌸 ✦</div>
+            </div>
+
+            <div class="prologue-card">
+              <h1 class="page-title hero-title">Hey, <span class="her-name-text">Sadhana</span>...</h1>
+              <p class="page-subtitle hero-subtitle">Unakaga rendu vaarthai aasaiya ezhudhiruken...</p>
+              <p class="hero-note">Poruppa adutha page thiruppu ma. Avasarame illa ❤️</p>
+              <div class="page-ornament">❦</div>
+            </div>
+            
+            <div class="nav-controls single-btn">
+              <button id="btn-page-1-next" class="btn-gold-book btn-next pulse-glow" data-next-to="2">
+                <span>Story-ah Aaramppikalaama? →</span>
+              </button>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span class="page-number">— 1 —</span>
+          </div>
+        </section>
+
+        <!-- CHAPTER 2: THE BIRTHDAY CANDLE 🎂 -->
+        <section id="page-2" class="parchment-page hidden-page">
+          <div class="page-inner text-center">
+            <div class="chapter-header">
+              <span class="chapter-num">CHAPTER II</span>
+              <h2 class="chapter-title">A Birthday Wish</h2>
+              <div class="chapter-divider">✦ 🎂 ✦</div>
+            </div>
+
+            <!-- Whimsical Candle Hint Banner (Inspired by Reference) -->
+            <div class="cake-hint-bubble">
+              <span class="cake-hint-text">Make a wish & blow out the candle! ✨</span>
+              <span class="cake-hint-arrow">↓</span>
+            </div>
+
+            <!-- Realistic 3-Tier Birthday Cake -->
+            <div id="reveal-cake" class="cake-container">
+              <div class="real-cake">
+                <div class="candle" id="cake-candle">
+                  <div class="flame" id="candle-flame"></div>
+                  <div class="smoke hidden" id="candle-smoke"></div>
+                </div>
+                <div class="cake-tier tier-top">
+                  <div class="frosting-drip"></div>
+                  <div class="pearls"><span></span><span></span><span></span></div>
+                </div>
+                <div class="cake-tier tier-middle">
+                  <div class="frosting-drip"></div>
+                  <div class="pearls"><span></span><span></span><span></span><span></span></div>
+                </div>
+                <div class="cake-tier tier-bottom">
+                  <div class="frosting-drip"></div>
+                  <div class="pearls"><span></span><span></span><span></span><span></span><span></span></div>
+                </div>
+                <div class="cake-plate"></div>
+              </div>
+            </div>
+
+            <!-- Blow Candle Button -->
+            <div id="blow-candle-wrap" class="blow-wrap-container">
+              <button id="btn-blow-candle" class="btn-gold-book pulse-glow">
+                <span>Hearty Wish Pannitu Blow Pannu Thangom! 🌬️🕯️</span>
+              </button>
+            </div>
+
+            <!-- Birthday Reveal Text & Flower Bouquet Character -->
+            <div id="bday-text-pop-wrap" class="bday-message-container">
+              <div class="bday-flower-reveal">
+                <img src="images/birthday-flowers.png" alt="A special bouquet for Sadhana" class="bday-flower-card-img" />
+              </div>
+              <h1 id="reveal-title" class="birthday-title">HAPPY BIRTHDAY</h1>
+              <h2 id="reveal-name" class="birthday-name her-name-text">Sadhana ❤️</h2>
+              <p id="reveal-sub" class="birthday-sub">Inniku Unnoda Day Kandippa Happy-ah irukanum! ❤️</p>
+            </div>
+
+            <div id="page-2-nav" class="nav-controls nav-fade-container">
+              <button class="btn-back btn-book-sec" data-back-to="1">← Pinnaadi Polam</button>
+              <button class="btn-next btn-gold-book" data-next-to="3">Adutha Page Polama? →</button>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span class="page-number">— 2 —</span>
+          </div>
+        </section>
+
+        <!-- CHAPTER 3: THE SEALED ENVELOPE 💌 -->
+        <section id="page-3" class="parchment-page hidden-page">
+          <div class="page-inner text-center">
+            <div class="chapter-header">
+              <span class="chapter-num">CHAPTER III</span>
+              <h2 class="chapter-title">A Sealed Letter</h2>
+              <div class="chapter-divider">✦ ✉️ ✦</div>
+            </div>
+
+            <p class="page-subtitle mb-4" id="envelope-hint-text">Andha Wax Seal-ah Click Pannu Ma...</p>
+            
+            <!-- Digital 3D Envelope -->
+            <div class="envelope-wrapper">
+              <div class="envelope" id="envelope">
+                <div class="envelope-back"></div>
+                <div class="envelope-letter" id="envelope-letter">
+                  <div class="letter-content">
+                    <div class="letter-salutation">Dear <span class="her-name-text">Sadhana</span>,</div>
+                    <p id="short-msg-text" class="letter-body"></p>
+                    <div class="letter-signature">With all my love, your hubby ❤️</div>
+                  </div>
+                </div>
+                <div class="envelope-front"></div>
+                <div class="envelope-top" id="envelope-top"></div>
+                <button class="wax-seal" id="wax-seal" aria-label="Open envelope">
+                  <span class="seal-heart">❤️</span>
+                  <span class="seal-text">OPEN</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Fold Letter Back Envelope Button -->
+            <div id="envelope-toggle-wrap" class="mt-2 hidden">
+              <button id="btn-toggle-envelope" class="btn-book-sec">
+                <span>Letter-ah Thirumba Ulle Vechuko ✉️</span>
+              </button>
+            </div>
+
+            <div class="nav-controls mt-4">
+              <button class="btn-back btn-book-sec" data-back-to="2">← Pinnaadi Polam</button>
+              <button id="btn-next-3" class="btn-next btn-gold-book disabled-btn" data-next-to="4" disabled>Adutha Page Polama? →</button>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span class="page-number">— 3 —</span>
+          </div>
+        </section>
+
+        <!-- CHAPTER 4: PERSONAL BIRTHDAY LETTER ✍️ -->
+        <section id="page-4" class="parchment-page hidden-page">
+          <div class="page-inner text-center">
+            <div class="chapter-header">
+              <span class="chapter-num">CHAPTER IV</span>
+              <h2 class="chapter-title">Straight Out Of My Heart</h2>
+              <div class="chapter-divider">✦ ✍️ ✦</div>
+            </div>
+
+            <div class="letter-card glass-card-book">
+              <div class="card-decorative-stars">✨ 🌸 ✨</div>
+              <div class="handwritten-paper">
+                <p id="personal-msg-text" class="typewriter-text"></p>
+              </div>
+              <div class="card-footer-heart">❤️</div>
+            </div>
+
+            <div class="nav-controls">
+              <button class="btn-back btn-book-sec" data-back-to="3">← Pinnaadi Polam</button>
+              <button class="btn-next btn-gold-book" data-next-to="5">Adutha Page Polama? →</button>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span class="page-number">— 4 —</span>
+          </div>
+        </section>
+
+        <!-- CHAPTER 5: UNAKU THERIYAMA NEE ENAKAGA SENJADHU 📜 -->
+        <section id="page-5" class="parchment-page hidden-page">
+          <div class="page-inner text-center">
+            <div class="chapter-header ch5-header">
+              <span class="chapter-num">CHAPTER V</span>
+              <h2 class="chapter-title" id="ch5-main-title">Unaku Theriyama...</h2>
+              <div class="chapter-divider">✦ 📜 ✦</div>
+            </div>
+
+            <!-- Page Subtitle & Quote -->
+            <div class="ch5-subtitle-wrap">
+              <h3 class="ch5-intro-subheading">Nee Enakaga Neraya Senjiruka ❤️</h3>
+              <p class="ch5-subtitle-text">"Nee enakkaga panna kutti kutti vishyangal... unakku nyabagam kooda irukkadhu, aana enaku irukku."</p>
+            </div>
+
+            <!-- Notes Discovery Counter Badge -->
+            <div class="ch5-counter-badge" id="ch5-counter-badge">
+              <span class="counter-icon">🔖</span>
+              <span id="ch5-counter-text">Kutti Notes Paarthadhu: 0 / 6</span>
+            </div>
+
+            <!-- 6 Handwritten Parchment Scrap Notes Grid -->
+            <div class="parchment-scraps-grid" id="parchment-scraps-grid">
+              <!-- Injected dynamically from birthdayData.chapter5Data -->
+            </div>
+
+            <!-- Completion Message (Revealed when 6/6 opened) -->
+            <div class="ch5-completion-msg hidden" id="ch5-completion-msg">
+              <p class="ch5-completion-text">“Idhu ellam unaku nyabagam irukkadhu... aana enaku irukku di thangoo! ❤️”</p>
+            </div>
+
+            <!-- Page Transition Sentence -->
+            <div class="ch5-page-transition-line">
+              <p class="transition-quote">“Adhaan indha kutti vishyangal ellam rumba special-ah irukku...”</p>
+            </div>
+
+            <!-- Navigation Controls: Clearly Visible Right Here -->
+            <div class="nav-controls ch5-nav" id="page-5-nav">
+              <button class="btn-back btn-book-sec" data-back-to="4">← Pinnaadi Polam</button>
+              <button class="btn-next btn-gold-book pulse-glow" data-next-to="6" id="btn-next-5">Adutha Page Polama? →</button>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span class="page-number">— 5 —</span>
+          </div>
+        </section>
+
+        <!-- CHAPTER 6: THE PAGES WE HAVEN'T WRITTEN YET... 📖 -->
+        <section id="page-6" class="parchment-page hidden-page">
+          <div class="page-inner text-center">
+            <div class="chapter-header">
+              <span class="chapter-num">CHAPTER VI</span>
+              <h2 class="chapter-title">The Pages We Haven’t Written Yet…</h2>
+              <div class="chapter-divider">✦ 📜 ✦</div>
+            </div>
+
+            <p class="page-subtitle mb-4">Namma serndhu ezhudha pora adutha adutha azhagana memories... ✨</p>
+            
+            <div class="future-notes-grid" id="future-notes-grid">
+              <!-- Injected dynamically from birthdayData.futureMemories -->
+            </div>
+
+            <div class="future-story-quote-wrap">
+              <div class="quote-filigree">✧ ✦ ✧</div>
+              <p class="future-story-quote">“This story isn't finished yet…”</p>
+              <div class="quote-filigree">✧ ✦ ✧</div>
+            </div>
+
+            <div class="nav-controls mt-4">
+              <button class="btn-back btn-book-sec" data-back-to="5">← Pinnaadi Polam</button>
+              <button class="btn-next btn-gold-book" data-next-to="7">Adutha Page Polama? →</button>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span class="page-number">— 6 —</span>
+          </div>
+        </section>
+
+        <!-- CHAPTER 7: OPEN WHEN YOU NEED A HUG 🫂 -->
+        <section id="page-7" class="parchment-page hidden-page">
+          <div class="page-inner text-center">
+            <div class="chapter-header ch7-header">
+              <span class="chapter-num">CHAPTER VII</span>
+              <h2 class="chapter-title">Oru Chinna Hug 🫂</h2>
+              <div class="chapter-divider">✦ 🫂 ✦</div>
+            </div>
+
+            <p class="page-subtitle hug-subtitle">Card-ah touch panni thirandhu paaru thangom... 💌</p>
+
+            <!-- Interactive 3D Pop-Up Hug Card Container -->
+            <div class="hug-card-wrapper">
+              <div class="hug-card-container" id="hug-card-container" role="button" tabindex="0" aria-label="Open hug card">
+                <img src="images/hug-card-closed.png" alt="Open When you need a HUG" class="hug-card-img closed" id="hug-card-closed" />
+                <img src="images/hug-card-opened.png" alt="I Love You This Much Hug" class="hug-card-img opened" id="hug-card-opened" />
+              </div>
+              <button class="hug-card-badge" id="hug-card-badge" aria-label="Toggle hug card">✨ Thottu Thirandhu Paaru ✨</button>
+            </div>
+
+            <div class="nav-controls mt-4">
+              <button class="btn-back btn-book-sec" data-back-to="6">← Pinnaadi Polam</button>
+              <button class="btn-next btn-gold-book pulse-glow" data-next-to="8" id="btn-next-7">Kadaisi Page Polama? →</button>
+            </div>
+          </div>
+          <div class="page-footer">
+            <span class="page-number">— 7 —</span>
+          </div>
+        </section>
+
+        <!-- CHAPTER 8: EPILOGUE & FINAL WISH 💖 -->
+        <section id="page-8" class="parchment-page hidden-page">
+          <div class="page-inner final-page-container">
+            
+            <!-- Romantic Closing Letter Header -->
+            <div class="final-header">
+              <div class="final-header-flourish">✦ 💖 ✦</div>
+              <h1 class="final-title">Happy Birthday, <span class="her-name-text">Sadhana</span> ❤️</h1>
+              <p class="final-subtitle">En Valkaiku Vandhadhukku Romba Nandri Thangoo ✨</p>
+            </div>
+
+            <!-- Soft Love Letter Note -->
+            <div class="final-love-letter">
+              <div class="letter-top-salutation">En Anbu Thangom Sadhana-ku... 💌</div>
+              <p id="final-msg-text" class="final-body">...</p>
+              <div class="letter-bottom-signature">
+                <span class="sig-note">Endrum unnoda dhaan... 💕</span>
+                <span class="sig-author">— Un Hubby Unakaga Aasaiya Ezhudhunadhu ❤️</span>
+              </div>
+            </div>
+
+            <!-- Interactive Secret Surprise & Replay -->
+            <div class="final-actions-row">
+              <div class="epilogue-secret-wrap">
+                <button id="btn-epilogue-surprise" class="btn-gold-book epilogue-surprise-btn" aria-label="Open surprise message">
+                  <span class="secret-icon">💌</span>
+                  <span class="secret-text">Oru Kutty Surprise Thangoo! Click Pannu ✨</span>
+                </button>
+              </div>
+
+              <div class="mini-cake-wrap">
+                <span class="mini-cake">✨ 🎂 ✨</span>
+              </div>
+
+              <div class="nav-controls">
+                <button class="btn-back btn-book-sec" data-back-to="7">← Pinnaadi Polam</button>
+                <button id="btn-final-climax" class="btn-gold-book pulse-glow">
+                  <span>Innoru Thadava Paarkalama? 💖</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+          <div class="page-footer">
+            <span class="page-number">— 8 —</span>
+          </div>
+        </section>
+
+      </div><!-- /.book-pages-wrapper -->
+    </div><!-- /#storybook -->
+
+  </main>
+
+  <!-- Chapter VI Future Note Unfolding Modal -->
+  <div id="future-note-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="future-paper-card">
+      <div class="scrap-pin-decoration">📍</div>
+      <button class="modal-close" id="future-note-close" aria-label="Close note">&times;</button>
+      <div class="future-paper-inner">
+        <span class="future-modal-tag" id="future-note-tag">Future Memory 01</span>
+        <h3 class="future-modal-title" id="future-modal-title">Places We Haven't Seen Yet</h3>
+        <div class="future-modal-heading" id="future-modal-heading">Innum namma serndhu poga vendiya edangal...</div>
+        <div class="future-modal-body" id="future-modal-body">Message...</div>
+      </div>
+      <div class="future-modal-footer">
+        <button class="btn-book-sec" id="future-modal-btn-close">Close Note 📖</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter V Parchment Scrap Note Expanded Modal -->
+  <div id="scrap-note-modal" class="scrap-modal-overlay hidden" aria-hidden="true">
+    <div class="scrap-paper-card">
+      <div class="scrap-pin-decoration">📍</div>
+      <div class="scrap-paper-inner">
+        <span class="scrap-modal-num" id="scrap-modal-num">Note 01</span>
+        <h3 class="scrap-modal-title" id="scrap-modal-title">Title</h3>
+        <div class="scrap-modal-heading" id="scrap-modal-heading">You probably don't know this...</div>
+        <div class="scrap-modal-body" id="scrap-modal-body">Message...</div>
+      </div>
+      <div class="scrap-modal-footer">
+        <button class="btn-book-sec" id="scrap-modal-close">Close Note 📖</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Chapter VII Epilogue Secret Drawing Surprise Modal -->
+  <div id="epilogue-surprise-modal" class="modal-overlay hidden" aria-hidden="true">
+    <div class="epilogue-modal-card">
+      <div class="scrap-pin-decoration">📍</div>
+      <button class="modal-close" id="epilogue-modal-close" aria-label="Close surprise">&times;</button>
+      <div class="epilogue-img-frame">
+        <img src="images/thinking-of-you.png?v=20261005_love_u" alt="Love u so much drawing" class="epilogue-popup-img" />
+      </div>
+      <p class="epilogue-modal-caption">“Unna nenachu drawing panna di thangom... Love u so much always! ❤️”</p>
+      <div class="epilogue-modal-footer">
+        <button class="btn-book-sec" id="btn-epilogue-close">Close Surprise ❤️</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROGRESS RIBBON DOTS -->
+  <div id="progress-indicator" class="progress-dots hidden">
+    <span class="dot" data-page="1"></span>
+    <span class="dot" data-page="2"></span>
+    <span class="dot" data-page="3"></span>
+    <span class="dot" data-page="4"></span>
+    <span class="dot" data-page="5"></span>
+    <span class="dot" data-page="6"></span>
+    <span class="dot" data-page="7"></span>
+    <span class="dot" data-page="8"></span>
+  </div>
+
+  <!-- PRELOADED NATURAL SOUND EFFECTS -->
+  <audio id="snd-candle-blow" src="sounds/candle-blow.wav?v=20261008_natural_candle" preload="auto"></audio>
+  <audio id="snd-page-turn" src="sounds/page-turn.wav" preload="auto"></audio>
+  <audio id="snd-quill-scratch" src="sounds/quill-scratch.wav?v=20261005_fountain_pen" preload="auto"></audio>
+  <audio id="snd-quill-scratch-1" src="sounds/quill-scratch-1.wav?v=20261005_fountain_pen" preload="auto"></audio>
+  <audio id="snd-quill-scratch-2" src="sounds/quill-scratch-2.wav?v=20261005_fountain_pen" preload="auto"></audio>
+  <audio id="snd-quill-scratch-3" src="sounds/quill-scratch-3.wav?v=20261005_fountain_pen" preload="auto"></audio>
+  <audio id="snd-sparkle" src="sounds/sparkle.wav" preload="auto"></audio>
+  <audio id="snd-letter-open" src="sounds/letter-open.wav" preload="auto"></audio>
+  <audio id="snd-letter-close" src="sounds/letter-close.wav" preload="auto"></audio>
+
+  <script src="script.js?v=20261011_whole_book"></script>
+</body>
+</html>
