@@ -746,10 +746,10 @@ function initInteractions() {
         if (candleFlame) candleFlame.classList.add("extinguished");
         if (candleSmoke) {
           candleSmoke.classList.remove("hidden");
-          candleSmoke.classList.add("active");
         }
-
+        const cakeHintBubble = document.querySelector(".cake-hint-bubble");
         if (blowCandleWrap) blowCandleWrap.classList.add("fade-out");
+        if (cakeHintBubble) cakeHintBubble.classList.add("fade-out");
 
         // 3. Reveal Birthday Message & Confetti as breath concludes
         setTimeout(() => {
@@ -1323,6 +1323,10 @@ function resetStorybookToBeginning() {
   const blowCandleWrap = document.getElementById("blow-candle-wrap");
   if (blowCandleWrap) {
     blowCandleWrap.classList.remove("fade-out");
+  }
+  const cakeHintBubble = document.querySelector(".cake-hint-bubble");
+  if (cakeHintBubble) {
+    cakeHintBubble.classList.remove("fade-out");
   }
   const bdayTextPopWrap = document.getElementById("bday-text-pop-wrap");
   if (bdayTextPopWrap) {
