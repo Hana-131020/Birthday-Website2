@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Caveat:wght@500;600;700&family=Cinzel:wght@500;600;700;800&family=Cinzel+Decorative:wght@600;700;900&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600;1,700&family=EB+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Gochi+Hand&family=Marck+Script&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   
-  <link rel="stylesheet" href="style.css?v=20261011_candle_fix">
+  <link rel="stylesheet" href="style.css?v=20261013_reply_feature">
 </head>
 <body>
 
@@ -365,6 +365,37 @@
               </div>
             </div>
 
+            <!-- Romantic Return Love Letter from Sadhana to Hubby 💌 -->
+            <div class="epilogue-reply-container" id="epilogue-reply-container">
+              <button type="button" class="btn-gold-book epilogue-reply-toggle-btn" id="epilogue-reply-toggle-btn" aria-expanded="false">
+                <span class="reply-toggle-icon">✍️</span>
+                <span>Un hubby kitta nee edhuna sollanum ah baby? 💌</span>
+                <span class="reply-toggle-arrow">▾</span>
+              </button>
+
+              <div class="epilogue-reply-card hidden" id="epilogue-reply-card">
+                <div class="reply-card-pin">📍</div>
+                <div class="reply-card-header">
+                  <span class="reply-card-tag">WITH ENDLESS LOVE • WITH ALL MY HEART</span>
+                  <h3 class="reply-card-title">En Hubby-kku Naan Solla Vendiyadhu... ❤️</h3>
+                  <p class="reply-card-subtitle">Un manasula irukkuradha aasaiya ezhudhu thangoo, enakku direct-ah pathirama vandhurum ✨</p>
+                </div>
+
+                <div class="reply-textarea-wrap">
+                  <textarea id="epilogue-reply-input" class="epilogue-textarea" rows="4" placeholder="En anbu hubby-ku... (Unaku en kitta solla thonura ella aasaiyum inga ezhuthu di thangoo 💕)"></textarea>
+                </div>
+
+                <div class="epilogue-reply-action-row">
+                  <button type="button" class="btn-gold-book pulse-glow btn-send-epilogue" id="epilogue-reply-send-btn">
+                    <span class="btn-send-label">Un Hubby-ku Send Panna Idha Click Pannu 💌✨</span>
+                  </button>
+                </div>
+
+                <div class="epilogue-reply-feedback hidden" id="epilogue-reply-feedback"></div>
+                <div class="epilogue-prev-reply-box hidden" id="epilogue-prev-reply-box"></div>
+              </div>
+            </div>
+
             <!-- Interactive Secret Surprise & Replay -->
             <div class="final-actions-row">
               <div class="epilogue-secret-wrap">
@@ -397,6 +428,16 @@
 
   </main>
 
+  <!-- NETLIFY FORM AUTO-DISCOVERY (Captured by Netlify build crawler) -->
+  <form name="sadhana-replies" method="POST" data-netlify="true" netlify-honeypot="bot-field" hidden>
+    <input type="hidden" name="form-name" value="sadhana-replies" />
+    <input type="hidden" name="note-type" />
+    <input type="hidden" name="note-id" />
+    <input type="hidden" name="note-title" />
+    <input type="hidden" name="timestamp" />
+    <textarea name="reply-message"></textarea>
+  </form>
+
   <!-- Chapter VI Future Note Unfolding Modal -->
   <div id="future-note-modal" class="modal-overlay hidden" aria-hidden="true">
     <div class="future-paper-card">
@@ -407,6 +448,27 @@
         <h3 class="future-modal-title" id="future-modal-title">Places We Haven't Seen Yet</h3>
         <div class="future-modal-heading" id="future-modal-heading">Innum namma serndhu poga vendiya edangal...</div>
         <div class="future-modal-body" id="future-modal-body">Message...</div>
+
+        <!-- Chapter VI Future Note Reply Section -->
+        <div class="modal-note-reply-box" id="future-reply-box">
+          <button type="button" class="btn-toggle-note-reply" id="future-reply-toggle-btn" aria-expanded="false">
+            <span class="reply-quill-icon">✍️</span>
+            <span class="reply-toggle-text">Un Hubby-ku Reply Panna Idha Click Pannu 💌</span>
+            <span class="reply-toggle-arrow">▾</span>
+          </button>
+          <div class="note-reply-drawer hidden" id="future-reply-drawer">
+            <div class="reply-input-wrap">
+              <textarea id="future-reply-input" class="reply-textarea" placeholder="Namma serndhu poga pora indha edatha pathi unaku enna thonudhu di thangom? 💕" rows="3"></textarea>
+            </div>
+            <div class="reply-action-row">
+              <button type="button" class="btn-gold-book btn-send-reply" id="future-reply-send-btn">
+                <span class="btn-send-label">Un Hubby-ku Send Panna Idha Click Pannu 💌</span>
+              </button>
+            </div>
+            <div class="reply-feedback-msg hidden" id="future-reply-feedback"></div>
+          </div>
+          <div class="previous-reply-badge hidden" id="future-prev-reply-badge"></div>
+        </div>
       </div>
       <div class="future-modal-footer">
         <button class="btn-book-sec" id="future-modal-btn-close">Close Note 📖</button>
@@ -423,6 +485,27 @@
         <h3 class="scrap-modal-title" id="scrap-modal-title">Title</h3>
         <div class="scrap-modal-heading" id="scrap-modal-heading">You probably don't know this...</div>
         <div class="scrap-modal-body" id="scrap-modal-body">Message...</div>
+
+        <!-- Chapter V Scrap Note Reply Section -->
+        <div class="modal-note-reply-box" id="scrap-reply-box">
+          <button type="button" class="btn-toggle-note-reply" id="scrap-reply-toggle-btn" aria-expanded="false">
+            <span class="reply-quill-icon">✍️</span>
+            <span class="reply-toggle-text">Un Hubby-ku Reply Panna Idha Click Pannu 💌</span>
+            <span class="reply-toggle-arrow">▾</span>
+          </button>
+          <div class="note-reply-drawer hidden" id="scrap-reply-drawer">
+            <div class="reply-input-wrap">
+              <textarea id="scrap-reply-input" class="reply-textarea" placeholder="Indha kutti note-ah padichadhum un manasula enna thonudho ezhudhu thangoo... 💕" rows="3"></textarea>
+            </div>
+            <div class="reply-action-row">
+              <button type="button" class="btn-gold-book btn-send-reply" id="scrap-reply-send-btn">
+                <span class="btn-send-label">Un Hubby-ku Send Panna Idha Click Pannu 💌</span>
+              </button>
+            </div>
+            <div class="reply-feedback-msg hidden" id="scrap-reply-feedback"></div>
+          </div>
+          <div class="previous-reply-badge hidden" id="scrap-prev-reply-badge"></div>
+        </div>
       </div>
       <div class="scrap-modal-footer">
         <button class="btn-book-sec" id="scrap-modal-close">Close Note 📖</button>
@@ -468,6 +551,6 @@
   <audio id="snd-letter-open" src="sounds/letter-open.wav" preload="auto"></audio>
   <audio id="snd-letter-close" src="sounds/letter-close.wav" preload="auto"></audio>
 
-  <script src="script.js?v=20261011_candle_fix"></script>
+  <script src="script.js?v=20261013_reply_feature"></script>
 </body>
 </html>

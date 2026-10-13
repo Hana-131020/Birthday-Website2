@@ -2699,3 +2699,371 @@ html, body {
   }
 }
 
+/* ==========================================================================
+   INTERACTIVE NOTES & EPILOGUE REPLY SYSTEM (Sadhana's Love Replies)
+   ========================================================================== */
+
+/* 1. Modal Note Reply Box (Chapter 5 Kutti Notes & Chapter 6 Future Memories) */
+.modal-note-reply-box {
+  margin-top: 20px;
+  padding-top: 14px;
+  border-top: 1.5px dashed rgba(180, 135, 90, 0.45);
+  text-align: left;
+}
+
+.btn-toggle-note-reply {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(122, 18, 29, 0.06);
+  border: 1.5px dashed var(--wine-accent);
+  color: var(--wine-accent);
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.25s ease;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.btn-toggle-note-reply:hover {
+  background: rgba(122, 18, 29, 0.12);
+  transform: translateY(-1px);
+}
+
+.btn-toggle-note-reply .reply-quill-icon {
+  font-size: 1.1rem;
+}
+
+.btn-toggle-note-reply .reply-toggle-arrow {
+  font-size: 0.95rem;
+  transition: transform 0.3s ease;
+}
+
+.btn-toggle-note-reply[aria-expanded="true"] .reply-toggle-arrow {
+  transform: rotate(180deg);
+}
+
+.note-reply-drawer {
+  margin-top: 12px;
+  animation: slideDownFade 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes slideDownFade {
+  0% { opacity: 0; transform: translateY(-8px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+.reply-input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.reply-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: #fffefb;
+  border: 2px solid #2d1418;
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  color: #2b1318;
+  line-height: 1.45;
+  resize: vertical;
+  min-height: 75px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.06), 2px 2px 0 rgba(45, 20, 24, 0.15);
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.reply-textarea:focus {
+  outline: none;
+  border-color: var(--wine-accent);
+  box-shadow: 0 0 0 3px rgba(122, 18, 29, 0.18), inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.reply-textarea::placeholder {
+  color: #a48270;
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  opacity: 0.85;
+}
+
+.reply-action-row {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.btn-send-reply {
+  padding: 7px 18px;
+  font-size: 0.82rem;
+  border-radius: 20px;
+  border: 2px solid #2d1418;
+  background: linear-gradient(135deg, #dfb943 0%, #cf9e26 100%);
+  color: #23080e;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 2px 3px 0 #2d1418;
+  transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-send-reply:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 3px 5px 0 #2d1418;
+}
+
+.btn-send-reply:active {
+  transform: translateY(1px) scale(0.98);
+  box-shadow: 1px 1px 0 #2d1418;
+}
+
+.btn-send-reply:disabled {
+  opacity: 0.65;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.reply-feedback-msg {
+  margin-top: 10px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-family: var(--font-hand);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.35;
+  text-align: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.reply-feedback-msg.success {
+  background: #f1f8ed;
+  border: 1.5px solid #4a8235;
+  color: #2a5a1a;
+}
+
+.reply-feedback-msg.error {
+  background: #fdf2f2;
+  border: 1.5px solid #c93b3b;
+  color: #8c1e1e;
+}
+
+.previous-reply-badge {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background: rgba(223, 185, 67, 0.12);
+  border: 1.5px dashed var(--gold-secondary);
+  border-radius: 6px;
+  font-family: var(--font-hand);
+  font-size: 1.1rem;
+  color: #5c3214;
+  line-height: 1.35;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.previous-reply-badge .prev-reply-label {
+  font-weight: 700;
+  color: var(--wine-accent);
+  font-size: 0.95rem;
+  display: flex;
+  justify-content: space-between;
+}
+
+.previous-reply-badge .prev-reply-text {
+  font-style: italic;
+  color: #2b1318;
+}
+
+/* 2. Chapter 8 Epilogue Return Love Letter to Hubby */
+.epilogue-reply-container {
+  margin: 16px auto 14px auto;
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+}
+
+.epilogue-reply-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  font-size: 0.86rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  border-radius: 50px;
+  width: 100%;
+  justify-content: center;
+  box-shadow: 4px 5px 0 #1a0408, 0 6px 20px rgba(122, 18, 29, 0.35);
+}
+
+.epilogue-reply-toggle-btn .reply-toggle-icon {
+  font-size: 1.25rem;
+}
+
+.epilogue-reply-toggle-btn .reply-toggle-arrow {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+}
+
+.epilogue-reply-toggle-btn[aria-expanded="true"] .reply-toggle-arrow {
+  transform: rotate(180deg);
+}
+
+.epilogue-reply-card {
+  margin-top: 16px;
+  background-color: #fffdf8;
+  background-image: 
+    linear-gradient(90deg, transparent 38px, rgba(180, 45, 65, 0.25) 38px, rgba(180, 45, 65, 0.25) 40px, transparent 40px),
+    repeating-linear-gradient(
+      to bottom,
+      transparent 0px,
+      transparent 31px,
+      rgba(180, 135, 90, 0.22) 31px,
+      rgba(180, 135, 90, 0.22) 32px
+    );
+  border: 2.5px solid #2d1418;
+  border-radius: 12px;
+  padding: 24px 18px 18px 28px;
+  position: relative;
+  box-shadow: 5px 6px 0 #2d1418, 0 16px 36px rgba(0, 0, 0, 0.2);
+  text-align: left;
+  animation: slideDownFade 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.reply-card-pin {
+  position: absolute;
+  top: -12px;
+  left: 24px;
+  font-size: 1.4rem;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
+}
+
+.reply-card-header {
+  margin-bottom: 12px;
+}
+
+.reply-card-tag {
+  display: inline-block;
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  color: var(--wine-accent);
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.reply-card-title {
+  font-family: var(--font-hand);
+  font-size: 1.55rem;
+  color: #2d1418;
+  margin: 0 0 4px 0;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.reply-card-subtitle {
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: #634335;
+  font-style: italic;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.epilogue-textarea {
+  width: 100%;
+  box-sizing: border-box;
+  background: rgba(255, 255, 255, 0.88);
+  border: 2px solid #2d1418;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-family: var(--font-hand);
+  font-size: 1.3rem;
+  color: #23080e;
+  line-height: 1.45;
+  resize: vertical;
+  min-height: 95px;
+  box-shadow: inset 0 2px 5px rgba(0,0,0,0.06), 2px 2px 0 rgba(45, 20, 24, 0.15);
+  transition: all 0.25s ease;
+}
+
+.epilogue-textarea:focus {
+  outline: none;
+  background: #ffffff;
+  border-color: var(--wine-accent);
+  box-shadow: 0 0 0 3px rgba(122, 18, 29, 0.18), inset 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.epilogue-textarea::placeholder {
+  color: #9e7f6e;
+  font-family: var(--font-hand);
+  font-size: 1.12rem;
+  opacity: 0.85;
+}
+
+.epilogue-reply-action-row {
+  margin-top: 12px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn-send-epilogue {
+  padding: 10px 24px;
+  font-size: 0.85rem;
+  border-radius: 50px;
+}
+
+.epilogue-reply-feedback {
+  margin-top: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-family: var(--font-hand);
+  font-size: 1.25rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.epilogue-reply-feedback.success {
+  background: #f1f8ed;
+  border: 1.5px solid #4a8235;
+  color: #2a5a1a;
+}
+
+.epilogue-reply-feedback.error {
+  background: #fdf2f2;
+  border: 1.5px solid #c93b3b;
+  color: #8c1e1e;
+}
+
+.epilogue-prev-reply-box {
+  margin-top: 14px;
+  padding: 12px 16px;
+  background: rgba(223, 185, 67, 0.15);
+  border: 1.5px dashed var(--gold-secondary);
+  border-radius: 8px;
+  font-family: var(--font-hand);
+  font-size: 1.2rem;
+  color: #2d1418;
+  line-height: 1.45;
+}
+
+.epilogue-prev-reply-box .prev-tag {
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--wine-accent);
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 4px;
+}
+
+

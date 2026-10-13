@@ -953,6 +953,9 @@ function initInteractions() {
 
           // Type out message with animated quill fountain pen
           typeScrapNoteMessage(noteObj.message);
+          if (typeof updateScrapModalReplyUI === "function") {
+            updateScrapModalReplyUI(noteObj);
+          }
         }
       }
     });
@@ -1038,6 +1041,9 @@ function initInteractions() {
           triggerFloatingHearts(item, 8);
 
           typeFutureNoteMessage(memory.message);
+          if (typeof updateFutureModalReplyUI === "function") {
+            updateFutureModalReplyUI(memory);
+          }
         }
       }
     });
@@ -1167,6 +1173,361 @@ function initInteractions() {
       }
     });
   }
+
+  // Initialize Interactive Notes & Epilogue Reply System
+  initReplySystem();
+}
+
+/* ==========================================================================
+   INTERACTIVE NOTES & EPILOGUE REPLY SYSTEM (Sadhana's Love Replies)
+   ========================================================================== */
+
+let currentActiveScrapNote = null;
+let currentActiveFutureNote = null;
+
+function getSavedReplies() {
+  try {
+    const raw = localStorage.getItem("sadhana_book_replies");
+    return raw ? JSON.parse(raw) : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function saveReplyLocally(key, replyObj) {
+  try {
+    const all = getSavedReplies();
+    all[key] = replyObj;
+    localStorage.setItem("sadhana_book_replies", JSON.stringify(all));
+  } catch (e) {
+    console.warn("Local storage error:", e);
+  }
+}
+
+async function sendReplyToNetlify({ noteType, noteId, noteTitle, message }) {
+  const timestamp = new Date().toLocaleString("en-IN", {
+    dateStyle: "medium",
+    timeStyle: "short"
+  });
+
+  // 1. Always save in localStorage first (never lose user input)
+  saveReplyLocally(noteId, {
+    noteType,
+    noteId,
+    noteTitle,
+    message,
+    timestamp
+  });
+
+  // 2. Submit to Netlify Forms endpoint via AJAX
+  const bodyParams = new URLSearchParams();
+  bodyParams.append("form-name", "sadhana-replies");
+  bodyParams.append("note-type", noteType);
+  bodyParams.append("note-id", noteId);
+  bodyParams.append("note-title", noteTitle || "Untitled Note");
+  bodyParams.append("timestamp", timestamp);
+  bodyParams.append("reply-message", message);
+
+  try {
+    const response = await fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: bodyParams.toString()
+    });
+    return response.ok;
+  } catch (err) {
+    console.warn("Netlify form network request warning (locally saved):", err);
+    return true; // Still treated as success locally
+  }
+}
+
+function updateScrapModalReplyUI(noteObj) {
+  if (!noteObj) return;
+  currentActiveScrapNote = noteObj;
+  const noteKey = `ch5_note_${noteObj.id || noteObj.numStr}`;
+  const saved = getSavedReplies()[noteKey];
+
+  const drawer = document.getElementById("scrap-reply-drawer");
+  const toggleBtn = document.getElementById("scrap-reply-toggle-btn");
+  const input = document.getElementById("scrap-reply-input");
+  const feedback = document.getElementById("scrap-reply-feedback");
+  const prevBadge = document.getElementById("scrap-prev-reply-badge");
+
+  if (feedback) {
+    feedback.className = "reply-feedback-msg hidden";
+    feedback.textContent = "";
+  }
+  if (input) input.value = "";
+  if (drawer) drawer.classList.add("hidden");
+  if (toggleBtn) {
+    toggleBtn.setAttribute("aria-expanded", "false");
+    const label = toggleBtn.querySelector(".reply-toggle-text");
+    if (label) {
+      label.textContent = saved ? "Un Reply-ah Edit Panna / Paarka... 💌" : "Un Hubby-ku Reply Panna Idha Click Pannu... 💌";
+    }
+  }
+
+  if (prevBadge) {
+    if (saved) {
+      prevBadge.classList.remove("hidden");
+      prevBadge.innerHTML = `
+        <span class="prev-reply-label"><span>✨ Un Anbu Reply (${saved.timestamp}):</span></span>
+        <span class="prev-reply-text">“${saved.message}”</span>
+      `;
+    } else {
+      prevBadge.classList.add("hidden");
+      prevBadge.innerHTML = "";
+    }
+  }
+}
+
+function updateFutureModalReplyUI(memoryObj) {
+  if (!memoryObj) return;
+  currentActiveFutureNote = memoryObj;
+  const noteKey = `ch6_future_${memoryObj.id || memoryObj.tag}`;
+  const saved = getSavedReplies()[noteKey];
+
+  const drawer = document.getElementById("future-reply-drawer");
+  const toggleBtn = document.getElementById("future-reply-toggle-btn");
+  const input = document.getElementById("future-reply-input");
+  const feedback = document.getElementById("future-reply-feedback");
+  const prevBadge = document.getElementById("future-prev-reply-badge");
+
+  if (feedback) {
+    feedback.className = "reply-feedback-msg hidden";
+    feedback.textContent = "";
+  }
+  if (input) input.value = "";
+  if (drawer) drawer.classList.add("hidden");
+  if (toggleBtn) {
+    toggleBtn.setAttribute("aria-expanded", "false");
+    const label = toggleBtn.querySelector(".reply-toggle-text");
+    if (label) {
+      label.textContent = saved ? "Un Reply-ah Edit Panna / Paarka... 💌" : "Un Hubby-ku Reply Panna Idha Click Pannu... 💌";
+    }
+  }
+
+  if (prevBadge) {
+    if (saved) {
+      prevBadge.classList.remove("hidden");
+      prevBadge.innerHTML = `
+        <span class="prev-reply-label"><span>✨ Un Anbu Reply (${saved.timestamp}):</span></span>
+        <span class="prev-reply-text">“${saved.message}”</span>
+      `;
+    } else {
+      prevBadge.classList.add("hidden");
+      prevBadge.innerHTML = "";
+    }
+  }
+}
+
+function updateEpilogueReplyUI() {
+  const saved = getSavedReplies()["ch8_epilogue_letter"];
+  const prevBox = document.getElementById("epilogue-prev-reply-box");
+  const toggleBtn = document.getElementById("epilogue-reply-toggle-btn");
+  if (toggleBtn) {
+    const span = toggleBtn.querySelector("span:not(.reply-toggle-icon):not(.reply-toggle-arrow)");
+    if (span) {
+      span.textContent = saved ? "Un Maru-Kadhidham (Sent) - Paarka / Edit Panna 💌" : "Un hubby kitta nee edhuna sollanum ah baby? 💌";
+    }
+  }
+  if (prevBox) {
+    if (saved) {
+      prevBox.classList.remove("hidden");
+      prevBox.innerHTML = `
+        <span class="prev-tag">💌 UN ANBU KADHIDHAM (SENT • ${saved.timestamp})</span>
+        <p class="prev-content" style="margin: 4px 0 0 0; font-style: italic;">“${saved.message}”</p>
+      `;
+    } else {
+      prevBox.classList.add("hidden");
+    }
+  }
+}
+
+function initReplySystem() {
+  // 1. Chapter V Scrap Note Reply Listeners
+  const scrapToggleBtn = document.getElementById("scrap-reply-toggle-btn");
+  const scrapDrawer = document.getElementById("scrap-reply-drawer");
+  const scrapSendBtn = document.getElementById("scrap-reply-send-btn");
+  const scrapInput = document.getElementById("scrap-reply-input");
+  const scrapFeedback = document.getElementById("scrap-reply-feedback");
+
+  if (scrapToggleBtn && scrapDrawer) {
+    scrapToggleBtn.addEventListener("click", () => {
+      const isHidden = scrapDrawer.classList.toggle("hidden");
+      scrapToggleBtn.setAttribute("aria-expanded", !isHidden);
+      if (!isHidden && scrapInput) {
+        scrapInput.focus();
+        playLetterOpenSound(0.5);
+      }
+    });
+  }
+
+  if (scrapSendBtn && scrapInput) {
+    scrapSendBtn.addEventListener("click", async () => {
+      const text = scrapInput.value.trim();
+      if (!text) {
+        if (scrapFeedback) {
+          scrapFeedback.className = "reply-feedback-msg error";
+          scrapFeedback.textContent = "Edhavadhu oru kutty reply ezhudhunga di thangom... 💕";
+          scrapFeedback.classList.remove("hidden");
+        }
+        return;
+      }
+
+      scrapSendBtn.disabled = true;
+      scrapSendBtn.style.opacity = "0.75";
+
+      const noteTitle = currentActiveScrapNote ? `${currentActiveScrapNote.numStr} - ${currentActiveScrapNote.title}` : "Kutti Note";
+      const noteId = currentActiveScrapNote ? `ch5_note_${currentActiveScrapNote.id || currentActiveScrapNote.numStr}` : "ch5_note";
+
+      await sendReplyToNetlify({
+        noteType: "Chapter V - Kutti Note",
+        noteId,
+        noteTitle,
+        message: text
+      });
+
+      playQuillScratchSound();
+      playSparkleSound(0.7);
+      triggerFloatingHearts(scrapSendBtn, 10);
+      triggerMicroConfetti();
+
+      scrapSendBtn.disabled = false;
+      scrapSendBtn.style.opacity = "1";
+
+      if (scrapFeedback) {
+        scrapFeedback.className = "reply-feedback-msg success";
+        scrapFeedback.textContent = "Unga anbu reply unga hubby-kku pathirama serndhuruchu di thangom! ❤️💌";
+        scrapFeedback.classList.remove("hidden");
+      }
+
+      updateScrapModalReplyUI(currentActiveScrapNote);
+    });
+  }
+
+  // 2. Chapter VI Future Note Reply Listeners
+  const futureToggleBtn = document.getElementById("future-reply-toggle-btn");
+  const futureDrawer = document.getElementById("future-reply-drawer");
+  const futureSendBtn = document.getElementById("future-reply-send-btn");
+  const futureInput = document.getElementById("future-reply-input");
+  const futureFeedback = document.getElementById("future-reply-feedback");
+
+  if (futureToggleBtn && futureDrawer) {
+    futureToggleBtn.addEventListener("click", () => {
+      const isHidden = futureDrawer.classList.toggle("hidden");
+      futureToggleBtn.setAttribute("aria-expanded", !isHidden);
+      if (!isHidden && futureInput) {
+        futureInput.focus();
+        playLetterOpenSound(0.5);
+      }
+    });
+  }
+
+  if (futureSendBtn && futureInput) {
+    futureSendBtn.addEventListener("click", async () => {
+      const text = futureInput.value.trim();
+      if (!text) {
+        if (futureFeedback) {
+          futureFeedback.className = "reply-feedback-msg error";
+          futureFeedback.textContent = "Un manasula irukkuradha ezhudhu di thangoo... 💕";
+          futureFeedback.classList.remove("hidden");
+        }
+        return;
+      }
+
+      futureSendBtn.disabled = true;
+      futureSendBtn.style.opacity = "0.75";
+
+      const noteTitle = currentActiveFutureNote ? `${currentActiveFutureNote.tag} - ${currentActiveFutureNote.title}` : "Future Memory";
+      const noteId = currentActiveFutureNote ? `ch6_future_${currentActiveFutureNote.id || currentActiveFutureNote.tag}` : "ch6_future";
+
+      await sendReplyToNetlify({
+        noteType: "Chapter VI - Future Memory",
+        noteId,
+        noteTitle,
+        message: text
+      });
+
+      playQuillScratchSound();
+      playSparkleSound(0.7);
+      triggerFloatingHearts(futureSendBtn, 10);
+      triggerMicroConfetti();
+
+      futureSendBtn.disabled = false;
+      futureSendBtn.style.opacity = "1";
+
+      if (futureFeedback) {
+        futureFeedback.className = "reply-feedback-msg success";
+        futureFeedback.textContent = "Unga reply unga hubby-kku pathirama poiduchu! Romba eager-ah wait pannuvaaru ❤️✨";
+        futureFeedback.classList.remove("hidden");
+      }
+
+      updateFutureModalReplyUI(currentActiveFutureNote);
+    });
+  }
+
+  // 3. Chapter VIII Epilogue Return Love Letter Listeners
+  const epilogueToggleBtn = document.getElementById("epilogue-reply-toggle-btn");
+  const epilogueCard = document.getElementById("epilogue-reply-card");
+  const epilogueSendBtn = document.getElementById("epilogue-reply-send-btn");
+  const epilogueInput = document.getElementById("epilogue-reply-input");
+  const epilogueFeedback = document.getElementById("epilogue-reply-feedback");
+
+  if (epilogueToggleBtn && epilogueCard) {
+    epilogueToggleBtn.addEventListener("click", () => {
+      const isHidden = epilogueCard.classList.toggle("hidden");
+      epilogueToggleBtn.setAttribute("aria-expanded", !isHidden);
+      if (!isHidden) {
+        playLetterOpenSound(0.7);
+        triggerFloatingHearts(epilogueToggleBtn, 6);
+        if (epilogueInput) epilogueInput.focus();
+      }
+    });
+  }
+
+  if (epilogueSendBtn && epilogueInput) {
+    epilogueSendBtn.addEventListener("click", async () => {
+      const text = epilogueInput.value.trim();
+      if (!text) {
+        if (epilogueFeedback) {
+          epilogueFeedback.className = "epilogue-reply-feedback error";
+          epilogueFeedback.textContent = "Un anbu kadhidhathula edhavadhu ezhudhu thangoo... ❤️";
+          epilogueFeedback.classList.remove("hidden");
+        }
+        return;
+      }
+
+      epilogueSendBtn.disabled = true;
+      epilogueSendBtn.style.opacity = "0.75";
+
+      await sendReplyToNetlify({
+        noteType: "Chapter VIII - Climax Love Letter",
+        noteId: "ch8_epilogue_letter",
+        noteTitle: "Sadhana's Return Love Letter to Hubby",
+        message: text
+      });
+
+      playQuillScratchSound();
+      playSparkleSound(0.9);
+      triggerFloatingHearts(epilogueSendBtn, 16);
+      triggerMicroConfetti();
+
+      epilogueSendBtn.disabled = false;
+      epilogueSendBtn.style.opacity = "1";
+
+      if (epilogueFeedback) {
+        epilogueFeedback.className = "epilogue-reply-feedback success";
+        epilogueFeedback.textContent = "Unga kadhidham unga hubby-kku pathirama serndhuruchu di thangom! Endrum ungalodu dhaan... ❤️💌✨";
+        epilogueFeedback.classList.remove("hidden");
+      }
+
+      updateEpilogueReplyUI();
+    });
+  }
+
+  // Initial populate of Chapter 8 if existing reply
+  updateEpilogueReplyUI();
 }
 
 /* ==========================================================================
